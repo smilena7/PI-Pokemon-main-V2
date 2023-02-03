@@ -16,6 +16,14 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      imagen: {
+        type: DataTypes.STRING,
+        // poner un defaultValue:
+        //allowNull: false,
+      },
+      tipo: {
+        type: DataTypes.STRING,
+      },
       vida: {
         type: DataTypes.INTEGER,
       },
@@ -44,11 +52,20 @@ module.exports = (sequelize) => {
 /*
 - ID (Número de Pokemon) * : No puede ser un ID de un pokemon ya existente en la API pokeapi 
   - Nombre * - STRING
-  - Vida - NUMERO
-  - Ataque - NUMERO
-  - Defensa - NUMERO
-  - Velocidad - NUMERO
-  - Altura - NUMERO
-  - Peso - NUMERO
-Todas estas propiedades estan dentro de stats en la api
+  - Vida/hp - NUMERO
+  - Ataque/attack - NUMERO
+  - Defensa/defense - NUMERO
+  - Velocidad/speed - NUMERO
+  - Altura/height - NUMERO
+  - Peso/weight - NUMERO
+
+Todas estas propiedades estan dentro de stats en la api:
+El stats 0 es: hp
+El stats 1 es: attack
+El stats 2 es: defense
+El stats 5 es: speed
+
+
+
+
 */
