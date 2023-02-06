@@ -17,13 +17,15 @@
 //     =====`-.____`.___ \_____/___.-`___.-'=====
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+const getAllTypes = require("./src/controllers/typesController.js"); // con esto nos evitamos hacer un get de types cada vez que entregmos al navegador para que la tabla de relaciones se actualice y cree las relaciones
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
 const PORT = 3001;
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(PORT, () => {
+  server.listen(PORT, async () => {
+    await getAllTypes();
     console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
   });
 });

@@ -1,8 +1,35 @@
 const axios = require("axios");
 
-const { Pokemon } = require("../db.js");
+const { Pokemon, Tipo } = require("../db.js");
 
-// **GET /pokemons**
+// Obtener los datos de la db
+const getDbInfo = async function () {
+  const db = (
+    await Pokemon.findAll({
+      model: Tipo,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    })
+  ).map((pokemon) => {
+    const json = pokemon.toJSON();
+    return {
+      ...json,
+      types: json.types?.map((type) => type.name),
+    };
+  });
+  return db;
+};
+
+const getIDbyType = async (nombreTipo) => {
+  const infoDB = await Tipo.findOne({ where: { name: nombreTipo } });
+  const infoClean = infoDB.id;
+  console.log(infoClean);
+  return infoClean;
+};
+
+// *GET /pokemons*
 const getAllPokemons = async function (req, res) {
   try {
     const result = await axios(
@@ -10,10 +37,10 @@ const getAllPokemons = async function (req, res) {
     );
     const pokeApi = result.data;
 
-    //llamamos a cada uno de los pokemons por url
+    // Llamamos a cada uno de los pokemons por url
     let pokemonsArray = [];
 
-    //pero primero necesitamos extraer la url de cada pokemon
+    // Pero primero necesitamos extraer la url de cada pokemon
     for await (const pokemon of pokeApi.results) {
       const { data } = await axios(pokemon.url);
 
@@ -25,16 +52,24 @@ const getAllPokemons = async function (req, res) {
       });
     }
 
+    const dbData = await Pokemon.findAll();
+    const pokeDB = dbData.map((e) => e.dataValues);
+    const concatPokemons = pokemonsArray.concat(pokeDB);
+
+    console.log(concatPokemons, "dbData");
+
     // Inyectar a la base de datos todos los pokemones de la api oficial (pokeApi)
     // Investigar como inyectar un array a la tabla de mi DB
 
-    res.status(200).send(pokemonsArray);
+    // leer documentacion de sequelize para mirar como mejorar los tiempos de respuesta.
+
+    res.status(200).send(concatPokemons);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-// **GET /pokemons/{idPokemon}**
+// *GET /pokemons/{idPokemon}*
 const getPokemonID = async function (req, res) {
   const { id } = req.params;
 
@@ -69,7 +104,6 @@ const getPokemonID = async function (req, res) {
         height: pokeApiID.height,
         weight: pokeApiID.weight,
       };
-      console.log(pokemonID, "hola");
       res.status(200).send(pokemonID);
     }
   } catch (error) {
@@ -77,7 +111,7 @@ const getPokemonID = async function (req, res) {
   }
 };
 
-// **GET /pokemons?name="..."**:
+// *GET /pokemons?name="..."*:
 const getPokemonName = async function (req, res) {
   const { name } = req.query;
   try {
@@ -88,35 +122,39 @@ const getPokemonName = async function (req, res) {
       },
     });
 
-    console.log("hola");
-
     // 2. Aqui encontramos el pokemon por nombre desde la db
     const pokeNameDB = pokeDB
       .map((e) => e.dataValues)
-      .find((e) => e.name === name);
-
-    // 3. Solicitamos todos los pokemons de la api
-    const resultPokeApi = await axios(
-      `https://pokeapi.co/api/v2/pokemon/${name}`
-    );
-    const pokeApi = resultPokeApi.data;
-    // 4. Aqui encontramos el pokemon por nombre desde la api
-    const pokeNameApi = pokeApi;
+      ?.find((e) => e.name === name);
 
     // 5. Entonces:
-    if (!pokeNameDB && !pokeNameApi)
-      return res.status(400).json("No se encontró este Pokemón"); // 5.1 Error si se encuetra en la db NI en la api
-    if (!pokeNameDB) return res.status(200).send(pokeNameApi); // 5.2 Debe estar en la api si no esta en la db
-    if (!pokeNameApi) return res.status(200).send(pokeNameDB); // 5.3 Debe estar en la db si no esta en la api
+    let pokeNameApi = null;
+
+    if (pokeNameDB) {
+      return res.status(200).send(pokeNameDB);
+    } else {
+      // 3. Solicitamos todos los pokemons de la api
+      try {
+        const resultPokeApi = await axios(
+          `https://pokeapi.co/api/v2/pokemon/${name}`
+        );
+        const pokeApi = resultPokeApi.data;
+        // 4. Aqui encontramos el pokemon por nombre desde la api
+        pokeNameApi = pokeApi;
+        return res.status(200).send(pokeNameApi);
+      } catch (err) {
+        res.status(404).send({ message: "No se encontró este Pokemón" });
+      }
+    } // 5.2 Debe estar en la api si no esta en la db
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
 /* - Obtener el pokemon que coincida exactamente con el nombre pasado como query parameter (Puede ser de pokeapi o creado por nosotros)
 - Si no existe ningún pokemon mostrar un mensaje adecuado */
 
-// **POST /pokemons**:
+// *POST /pokemons*:
 const postPokemon = async function (req, res) {
   const { name, tipo, imagen, vida, ataque, defensa, velocidad, altura, peso } =
     req.body;
@@ -139,7 +177,6 @@ const postPokemon = async function (req, res) {
 
     const newPokemon = await Pokemon.create({
       name: name.toLowerCase(), // con este metodo convertimos el name en minuscula
-      tipo: tipo,
       imagen: imagen,
       vida: Number(vida),
       ataque: Number(ataque),
@@ -149,11 +186,20 @@ const postPokemon = async function (req, res) {
       peso: Number(peso),
     });
 
-    // Inyectar a la base de datos el pokemon creado donde estan los demas pokemones
+    tipo.map(async (elemento) => {
+      const typesID = await getIDbyType(elemento);
+      newPokemon.addTipos(typesID);
+    });
 
-    // hacemos la relacion de las bases de datos (pokemon y tipo)
+    /* const pokemonTypes = await Tipo.findAll({
+      where: {
+        name: tipo,
+      },
+    });
+    console.log("xx--xxxxxxxxx", tipo);
 
-    res.status(200).send("Pokemón creado exitosamente");
+    newPokemon.addTipos(pokemonTypes.id); */
+    res.status(200).send(newPokemon);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -168,7 +214,7 @@ module.exports = { getAllPokemons, getPokemonID, getPokemonName, postPokemon };
 
 /*
 
-- [ ] **GET /pokemons/{idPokemon}**:
+- [ ] *GET /pokemons/{idPokemon}*:
   - Obtener el detalle de un pokemon en particular
   - Debe traer solo los datos pedidos en la ruta de detalle de pokemon
   - Tener en cuenta que tiene que funcionar tanto para un id de un pokemon existente en pokeapi o uno creado por ustedes
@@ -186,3 +232,4 @@ if (id.includes("-")) {
   deberia hacerse un llamado por axios desde la api id
 }
 */
+// Hacemos la relacion del nuevo pokemon con todos los tipos que llegan en el array
