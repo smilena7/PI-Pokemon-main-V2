@@ -1,33 +1,6 @@
 const axios = require("axios");
 
-const { Pokemon, Tipo } = require("../db.js");
-
-// Obtener los datos de la db
-const getDbInfo = async function () {
-  const db = (
-    await Pokemon.findAll({
-      model: Tipo,
-      attributes: ["name"],
-      through: {
-        attributes: [],
-      },
-    })
-  ).map((pokemon) => {
-    const json = pokemon.toJSON();
-    return {
-      ...json,
-      types: json.types?.map((type) => type.name),
-    };
-  });
-  return db;
-};
-
-const getIDbyType = async (nombreTipo) => {
-  const infoDB = await Tipo.findOne({ where: { name: nombreTipo } });
-  const infoClean = infoDB.id;
-  console.log(infoClean);
-  return infoClean;
-};
+const { Pokemon, Tipo, PokemonTipo } = require("../db.js");
 
 // *GET /pokemons*
 const getAllPokemons = async function (req, res) {
@@ -63,6 +36,7 @@ const getAllPokemons = async function (req, res) {
 
     // leer documentacion de sequelize para mirar como mejorar los tiempos de respuesta.
 
+    console.log(res, "res");
     res.status(200).send(concatPokemons);
   } catch (error) {
     res.status(400).json({ message: error.message });
@@ -141,7 +115,12 @@ const getPokemonName = async function (req, res) {
         const pokeApi = resultPokeApi.data;
         // 4. Aqui encontramos el pokemon por nombre desde la api
         pokeNameApi = pokeApi;
-        return res.status(200).send(pokeNameApi);
+        return res.status(200).send({
+          id: pokeNameApi.id,
+          name: pokeNameApi.name,
+          type: pokeNameApi.types[0].type.name,
+          imagen: pokeNameApi.sprites.other["official-artwork"].front_default,
+        });
       } catch (err) {
         res.status(404).send({ message: "No se encontró este Pokemón" });
       }
@@ -151,13 +130,19 @@ const getPokemonName = async function (req, res) {
   }
 };
 
-/* - Obtener el pokemon que coincida exactamente con el nombre pasado como query parameter (Puede ser de pokeapi o creado por nosotros)
-- Si no existe ningún pokemon mostrar un mensaje adecuado */
-
 // *POST /pokemons*:
 const postPokemon = async function (req, res) {
-  const { name, tipo, imagen, vida, ataque, defensa, velocidad, altura, peso } =
-    req.body;
+  const {
+    name,
+    tipos,
+    imagen,
+    vida,
+    ataque,
+    defensa,
+    velocidad,
+    altura,
+    peso,
+  } = req.body;
 
   try {
     if (
@@ -175,38 +160,45 @@ const postPokemon = async function (req, res) {
     const existe = await Pokemon.findOne({ where: { name: name } });
     if (existe) return res.status(400).json("El pokemon ya existe");
 
-    const newPokemon = await Pokemon.create({
-      name: name.toLowerCase(), // con este metodo convertimos el name en minuscula
-      imagen: imagen,
-      vida: Number(vida),
-      ataque: Number(ataque),
-      defensa: Number(defensa),
-      velocidad: Number(velocidad),
-      altura: Number(altura),
-      peso: Number(peso),
-    });
+    const newPokemon = await Pokemon.create(
+      {
+        name: name.toLowerCase(), // con este metodo convertimos el name en minuscula
+        imagen: imagen,
+        vida: Number(vida),
+        ataque: Number(ataque),
+        defensa: Number(defensa),
+        velocidad: Number(velocidad),
+        altura: Number(altura),
+        peso: Number(peso),
+      },
+      {
+        include: [Tipo],
+      }
+    );
 
-    tipo.map(async (elemento) => {
-      const typesID = await getIDbyType(elemento);
-      newPokemon.addTipos(typesID);
-    });
-
-    /* const pokemonTypes = await Tipo.findAll({
+    // Hacemos la relacion del nuevo pokemon con todos los tipos que llegan en el array
+    const pokemonTypes = await Tipo.findAll({
       where: {
-        name: tipo,
+        name: tipos,
       },
     });
-    console.log("xx--xxxxxxxxx", tipo);
 
-    newPokemon.addTipos(pokemonTypes.id); */
-    res.status(200).send(newPokemon);
+    await newPokemon.addTipos(pokemonTypes);
+
+    const typeID = await Pokemon.findByPk(newPokemon.id, {
+      include: [
+        {
+          model: Tipo,
+          as: "Tipos",
+        },
+      ],
+    });
+
+    res.status(200).send(typeID.dataValues);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
-
-/* - Recibe los datos recolectados desde el formulario controlado de la ruta de creación de pokemons por body
-  - Crea un pokemon en la base de datos relacionado con sus tipos. */
 
 module.exports = { getAllPokemons, getPokemonID, getPokemonName, postPokemon };
 
@@ -232,4 +224,3 @@ if (id.includes("-")) {
   deberia hacerse un llamado por axios desde la api id
 }
 */
-// Hacemos la relacion del nuevo pokemon con todos los tipos que llegan en el array

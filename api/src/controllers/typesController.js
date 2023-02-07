@@ -26,7 +26,8 @@ const getAllTypes = async function (req, res) {
     });
     // 3. Buscamos todos los tipos de la db
     const allTypes = await Tipo.findAll();
-    return res.status(200).send(allTypes);
+    console.log(res);
+    res.status(200).send(allTypes);
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
