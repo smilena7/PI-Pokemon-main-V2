@@ -1,13 +1,30 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+//importamos la accion
+import { pokemonsAction } from "../../actions/pokemonsAction";
+import loading from "../../images/loading.gif";
+import style from "./Home.module.css";
 
 const Home = () => {
-  const [pokemons, setPokemons] = useState([]);
+  //dispatch
+  const dispatch = useDispatch();
 
-  const URL = "http://localhost:3001/api/pokemons";
+  //selector
+  const pokemons = useSelector((state) => state.pokemons.data);
+  const isLoading = useSelector((state) => state.pokemons.isLoading);
+
   useEffect(() => {
-    axios.get(URL).then((res) => setPokemons(res.data));
-  }, []);
+    dispatch(pokemonsAction());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <>
+        <img src={loading} alt="loading..." className={style.loading} />
+      </>
+    );
+  }
+
   return (
     <>
       {pokemons
@@ -21,3 +38,4 @@ const Home = () => {
 };
 
 export default Home;
+// {}

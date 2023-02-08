@@ -1,0 +1,8 @@
+/* Loading Pikachu */
+.loading {
+  position: absolute;
+  padding-top: 5%;
+  left: 40%;
+  width: 10rem;
+  height: 10rem;
+}
