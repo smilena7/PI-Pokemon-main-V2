@@ -1,9 +1,7 @@
-//{}
-import { combineReducers } from "redux";
-
-// importamos los reducers
-import pokemonReducer from "./pokemonsReducer";
+import { combineReducers } from "redux"; // Agrupamos los recucer
+import pokemonReducer from "./pokemonsReducer"; // Importamos los reducers
 
 export default combineReducers({
   pokemons: pokemonReducer,
 });
+// {}

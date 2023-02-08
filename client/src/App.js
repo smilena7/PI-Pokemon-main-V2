@@ -1,12 +1,12 @@
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-//pages
+// Pages
 import Welcome from "./pages/Welcome/Welcome.jsx";
 import Home from "./pages/Home/Home.jsx";
 
 function App() {
-  //aca es donde manejare todas las rutas
+  // Acá es donde manejaré todas las rutas
   return (
     <Router>
       <Switch>

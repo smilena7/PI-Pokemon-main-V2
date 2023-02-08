@@ -1,5 +1,4 @@
 /* eslint-disable import/no-anonymous-default-export */
-//{}
 import {
   GET_ALL_POKEMONS,
   IS_LOADING_ALL_POKEMONS,
@@ -7,7 +6,7 @@ import {
 } from "../types";
 
 const initialState = {
-  data: [],
+  data: [], // = que decir pokemons
   isLoading: false,
   error: "",
 };
@@ -41,3 +40,4 @@ const pokemonsReducer = (state = initialState, action) => {
 };
 
 export default pokemonsReducer;
+// {}

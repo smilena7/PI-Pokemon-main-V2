@@ -5,17 +5,14 @@ import {
   ERROR_ALL_POKEMONS,
 } from "../types";
 
-//{}
 export const pokemonsAction = () => async (dispatch) => {
   dispatch({
     type: IS_LOADING_ALL_POKEMONS,
   });
 
-  //guardar esta variable en un .env
-
   try {
-    const URL = "http://localhost:3001/api/pokemons";
-    const response = await axios.get(URL);
+    const URL = process.env.REACT_APP_BASE_URL; // Guardo la URL en una variable de entorno .env
+    const response = await axios.get(`${URL}/api/pokemons`);
     dispatch({
       type: GET_ALL_POKEMONS,
       payload: response.data,
@@ -28,3 +25,14 @@ export const pokemonsAction = () => async (dispatch) => {
     });
   }
 };
+// {}
+
+/*
+Linea 10:
+type: IS_LOADING_ALL_POKEMONS, 
+👆🏾 cada vez que se llame la accion, se ejecuta la accion (loading) 
+antes de llamar el servicio (get all pokemons). El loading inicia en true
+de acuerdo a lo planetado en el pokemonsReducer case IS_LOADING_ALL_POKEMONS
+
+
+*/
