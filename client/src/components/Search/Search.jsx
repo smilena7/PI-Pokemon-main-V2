@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { pokemonByNameAction } from "../../actions/pokemonByNameAction";
+import { pokemonsAction } from "../../actions/pokemonsAction";
+
 import style from "./Search.module.css";
 
 const Search = () => {
@@ -14,6 +16,11 @@ const Search = () => {
   const submit = (e) => {
     e.preventDefault();
     dispatch(pokemonByNameAction(namePokemon));
+    setNamePokemon("");
+  };
+
+  const handleCleanPokemon = (e) => {
+    dispatch(pokemonsAction());
   };
 
   return (
@@ -28,6 +35,7 @@ const Search = () => {
             placeholder="Busca tu pokemón favorito..."
           />
           <input className={style.button} type="submit" value="Buscar" />
+          <button onClick={handleCleanPokemon}>Limpiar</button>
         </div>
       </form>
     </div>

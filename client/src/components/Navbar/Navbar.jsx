@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
+import { createPokemonsByAction } from "../../actions/pokemonsAction";
+import { useDispatch } from "react-redux";
 import Search from "../Search/Search";
 import style from "./Navbar.module.css";
 
-const Navbar = ({ pokemonsTypes, setPokemonType }) => {
-  const [orderBy, setOrderBy] = useState("");
+const Navbar = ({ pokemonsTypes, setPokemonType, setOrderPokemonBy }) => {
+  const dispatch = useDispatch();
 
   const handleFilterByType = (e) => {
     setPokemonType(e.target.value);
   };
 
   const handleOrderBy = (e) => {
-    setOrderBy(e.target.value);
+    setOrderPokemonBy(e.target.value);
+  };
+
+  const handleCreateBy = (e) => {
+    dispatch(createPokemonsByAction(e.target.value));
   };
 
   return (
@@ -28,7 +34,7 @@ const Navbar = ({ pokemonsTypes, setPokemonType }) => {
       </select>
 
       {/*  Ordenado por existente o creado por nosotros */}
-      <select name="" id="">
+      <select name="" id="" onChange={(e) => handleCreateBy(e)}>
         <option value="creado">Creado por:</option>
         <option value="API">API</option>
         <option value="HStudent">Henry Student</option>

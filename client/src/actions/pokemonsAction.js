@@ -3,6 +3,8 @@ import {
   GET_ALL_POKEMONS,
   IS_LOADING_ALL_POKEMONS,
   ERROR_ALL_POKEMONS,
+  GET_CREATE_POKEMONS_BY,
+  ERROR_CREATE_POKEMONS_BY,
 } from "../types";
 
 export const pokemonsAction = () => async (dispatch) => {
@@ -24,6 +26,29 @@ export const pokemonsAction = () => async (dispatch) => {
     });
   }
 };
+
+export const createPokemonsByAction = (createBy) => async (dispatch) => {
+  dispatch({
+    type: IS_LOADING_ALL_POKEMONS,
+  });
+  try {
+    const URL = process.env.REACT_APP_BASE_URL; // Guardo la URL en una variable de entorno .env
+    const response = await axios.get(
+      `${URL}/api/pokemons?createBy=${createBy}`
+    );
+    dispatch({
+      type: GET_CREATE_POKEMONS_BY,
+      payload: response.data,
+    });
+  } catch (error) {
+    console.log(error.message);
+    dispatch({
+      type: ERROR_CREATE_POKEMONS_BY,
+      payload: error.message,
+    });
+  }
+};
+
 // {}
 
 /*

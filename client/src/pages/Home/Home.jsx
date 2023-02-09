@@ -9,9 +9,10 @@ import loading from "../../images/loading.gif";
 // Importando componentes
 import Navbar from "../../components/Navbar/Navbar";
 import Card from "../../components/Card/Card";
+//import Paged from "../../components/Paged/Paged";
 
 // Importando los filtrados de utils
-import { tipos } from "../../utils/filtros";
+import { tipos, ordenado } from "../../utils/filtros";
 // Importando estilos
 import style from "./Home.module.css";
 
@@ -19,7 +20,8 @@ import style from "./Home.module.css";
 
 const Home = () => {
   const [pokemonType, setPokemonType] = useState("");
-  const [filterByType, setFilterByType] = useState([]);
+  const [orderPokemonBy, setOrderPokemonBy] = useState("");
+  const [createPokemonBy, setCreatePokemonBy] = useState("");
 
   // Dispatch
   const dispatch = useDispatch();
@@ -29,8 +31,10 @@ const Home = () => {
   const isLoading = useSelector((state) => state.pokemons.isLoading);
   const pokemonsTypes = useSelector((state) => state.pokemonsByTypes.data);
 
+  // Filtrando los tipos de pokemons
   if (pokemonType) pokemons = tipos(pokemonType, pokemons);
-  console.log(pokemonType, "hola");
+  if (orderPokemonBy) pokemons = ordenado(orderPokemonBy, pokemons);
+
   useEffect(() => {
     if (pokemons.length === 0 || pokemonsTypes.length === 0) {
       dispatch(pokemonsAction());
@@ -38,26 +42,36 @@ const Home = () => {
     }
   }, [dispatch]);
 
-  if (isLoading) {
+  /*  if (isLoading) {
     return (
       <>
         <img src={loading} alt="loading..." className={style.loading} />
       </>
     );
-  }
+  } */
 
   return (
     <div>
       <div>
-        <Navbar pokemonsTypes={pokemonsTypes} setPokemonType={setPokemonType} />
+        <Navbar
+          pokemonsTypes={pokemonsTypes}
+          setPokemonType={setPokemonType}
+          setOrderPokemonBy={setOrderPokemonBy}
+          setCreatePokemonBy={setCreatePokemonBy}
+          createPokemonBy={createPokemonBy}
+        />
       </div>
-      <div className={style.containerHome}>
-        {pokemons
-          ? pokemons.map((pokemon) => {
-              return <Card pokemon={pokemon} key={pokemon.id} />;
-            })
-          : "holaaa"}
-      </div>
+      {isLoading ? (
+        <img src={loading} alt="loading..." className={style.loading} />
+      ) : (
+        <div className={style.containerHome}>
+          {pokemons
+            ? pokemons.map((pokemon) => {
+                return <Card pokemon={pokemon} key={pokemon.id} />;
+              })
+            : "holaaa"}
+        </div>
+      )}
     </div>
   );
 };

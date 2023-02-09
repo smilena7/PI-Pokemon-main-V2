@@ -4,6 +4,8 @@ const { Pokemon, Tipo, PokemonTipo } = require("../db.js");
 
 // *GET /pokemons*
 const getAllPokemons = async function (req, res) {
+  const { createBy } = req.query;
+
   try {
     const result = await axios(
       "https://pokeapi.co/api/v2/pokemon?limit=40&offset=0"
@@ -22,6 +24,7 @@ const getAllPokemons = async function (req, res) {
         name: data.name,
         type: data.types[0].type.name,
         imagen: data.sprites.other["official-artwork"].front_default,
+        fuerza: data.stats[1].base_stat,
       });
     }
 
@@ -29,15 +32,13 @@ const getAllPokemons = async function (req, res) {
     const pokeDB = dbData.map((e) => e.dataValues);
     const concatPokemons = pokemonsArray.concat(pokeDB);
 
-    console.log(concatPokemons, "dbData");
-
-    // Inyectar a la base de datos todos los pokemones de la api oficial (pokeApi)
-    // Investigar como inyectar un array a la tabla de mi DB
-
-    // leer documentacion de sequelize para mirar como mejorar los tiempos de respuesta.
-
-    console.log(res, "res");
-    res.status(200).send(concatPokemons);
+    if (createBy === "HStudent") {
+      res.status(200).send(pokeDB.length === 0 ? [] : pokeDB);
+    } else if (createBy === "API") {
+      res.status(200).send(pokemonsArray);
+    } else {
+      res.status(200).send(concatPokemons);
+    }
   } catch (error) {
     res.status(400).json({ message: error.message });
   }

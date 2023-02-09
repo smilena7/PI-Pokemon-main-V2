@@ -3,6 +3,9 @@ import {
   GET_ALL_POKEMONS,
   IS_LOADING_ALL_POKEMONS,
   ERROR_ALL_POKEMONS,
+  GET_CREATE_POKEMONS_BY,
+  ERROR_CREATE_POKEMONS_BY,
+  GET_POKEMON_BY_NAME,
 } from "../types";
 
 const initialState = {
@@ -32,6 +35,28 @@ const pokemonsReducer = (state = initialState, action) => {
         ...state,
         isLoading: false,
         error: action.payload,
+      };
+    case GET_CREATE_POKEMONS_BY:
+      return {
+        ...state,
+        data: action.payload,
+        isLoading: false,
+        error: "",
+      };
+    case ERROR_CREATE_POKEMONS_BY:
+      return {
+        ...state,
+
+        isLoading: false,
+        error: action.payload,
+      };
+
+    case GET_POKEMON_BY_NAME:
+      return {
+        ...state,
+        data: [action.payload],
+        isLoading: false,
+        error: "",
       };
 
     default:
