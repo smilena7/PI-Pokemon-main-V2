@@ -1,38 +1,62 @@
 import React, { useState } from "react";
 import style from "./Paged.module.css";
 
-const Paged = ({ pokemons }) => {
-  const [page, setPage] = useState(0);
+const Paged = ({ page, setPage, maxPage }) => {
+  const [input, setInput] = useState(1);
 
-  const paged = () => {
-    if (pokemons.length) return pokemons.slice(page, page + 9);
-    if (pokemons.info) return pokemons;
-    return [];
-  };
-
-  const array = paged();
-
-  const nextPokePage = () => {
-    if (pokemons.length > page + 9) {
-      setPage(page + 9);
+  const onKeyDown = (e) => {
+    if (e.keyCode === 4) {
+      setPage(parseInt(e.target.value));
+      if (
+        parseInt(e.target.value < 1) ||
+        parseInt(e.target.value) > Math.ceil(maxPage) ||
+        isNaN(parseInt(e.target.value))
+      ) {
+        setInput(1);
+        setPage(1);
+      } else {
+        setPage(parseInt(e.target.value));
+      }
     }
   };
 
-  const previusPokePage = () => {
-    if (page > 0) {
-      setPage(page - 9);
-    }
+  const onChange = (e) => {
+    setInput(e.target.value);
   };
+
+  const previousPage = () => {
+    setPage(page - 1);
+    setInput(input - 1);
+  };
+  const nextPage = () => {
+    setPage(page + 1);
+    setInput(input + 1);
+  };
+
   return (
     <div className={style.containerPaged}>
-      <div className={style.botones}>
-        <button onClick={previusPokePage} className={style.pages}>
-          &laquo; Anterior
-        </button>
-        <button onClick={nextPokePage} className={style.pages}>
-          Siguiente &raquo;
-        </button>
-      </div>
+      <button
+        disabled={page === 1 || page < 1}
+        onClick={previousPage}
+        className={style.pages}
+      >
+        &laquo; Anterior
+      </button>
+      <input
+        onKeyDown={(e) => onKeyDown(e)}
+        onChange={(e) => onChange(e)}
+        name="page"
+        autoCapitalize="off"
+        value={input}
+      />
+      <p>de 4</p>
+      <button
+        disabled={page === Math.ceil(maxPage) || page > Math.ceil(maxPage)}
+        onClick={nextPage}
+        className={style.pages}
+      >
+        Siguiente &raquo;
+      </button>
     </div>
   );
 };

@@ -9,7 +9,7 @@ import loading from "../../images/loading.gif";
 // Importando componentes
 import Navbar from "../../components/Navbar/Navbar";
 import Card from "../../components/Card/Card";
-//import Paged from "../../components/Paged/Paged";
+import Paged from "../../components/Paged/Paged";
 
 // Importando los filtrados de utils
 import { tipos, ordenado } from "../../utils/filtros";
@@ -22,6 +22,8 @@ const Home = () => {
   const [pokemonType, setPokemonType] = useState("");
   const [orderPokemonBy, setOrderPokemonBy] = useState("");
   const [createPokemonBy, setCreatePokemonBy] = useState("");
+  const [page, setPage] = useState(1);
+  const [porPage, setPorPage] = useState(12);
 
   // Dispatch
   const dispatch = useDispatch();
@@ -49,6 +51,8 @@ const Home = () => {
       </>
     );
   } */
+  // Paginado
+  const maxPage = pokemons.length / porPage;
 
   return (
     <div>
@@ -61,17 +65,22 @@ const Home = () => {
           createPokemonBy={createPokemonBy}
         />
       </div>
-      {isLoading ? (
-        <img src={loading} alt="loading..." className={style.loading} />
-      ) : (
-        <div className={style.containerHome}>
-          {pokemons
-            ? pokemons.map((pokemon) => {
-                return <Card pokemon={pokemon} key={pokemon.id} />;
-              })
-            : "holaaa"}
-        </div>
-      )}
+      <div>
+        {isLoading ? (
+          <img src={loading} alt="loading..." className={style.loading} />
+        ) : (
+          <div className={style.containerHome}>
+            {pokemons
+              ? pokemons
+                  .slice((page - 1) * porPage, (page - 1) * porPage + porPage)
+                  .map((pokemon) => {
+                    return <Card pokemon={pokemon} key={pokemon.id} />;
+                  })
+              : "holaaa"}
+          </div>
+        )}
+      </div>
+      <Paged page={page} setPage={setPage} maxPage={maxPage} />
     </div>
   );
 };

@@ -1,7 +1,16 @@
+.containerPaged {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
 .pages {
   /* margin-top: -40px;
     margin-bottom: 30px; */
-
+  display: flex;
+  align-items: center;
+  justify-content: center;
   line-height: 10px;
   font-weight: bold;
   font-size: large;
@@ -17,7 +26,27 @@
 .pages:hover {
   background: #003060;
   color: white;
-  position: relative;
-  top: 10px;
   box-shadow: none;
+}
+
+button[disabled] {
+  background: rgb(208, 229, 236);
+  cursor: no-drop;
+}
+
+input {
+  height: 25px;
+  width: 50px;
+  text-align: center;
+  padding: 5px 25px;
+  border: 1px solid #003060;
+  border-radius: 3px;
+  color: black;
+  font-weight: bold;
+}
+p {
+  color: black;
+  font-weight: unset;
+  font-size: large;
+  font-weight: inherit;
 }
