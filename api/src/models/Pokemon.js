@@ -21,9 +21,6 @@ module.exports = (sequelize) => {
         // poner un defaultValue:
         //allowNull: false,
       },
-      /* tipo: {
-        type: DataTypes.STRING,
-      }, */
       vida: {
         type: DataTypes.INTEGER,
       },

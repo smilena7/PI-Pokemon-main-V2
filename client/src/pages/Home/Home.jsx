@@ -1,20 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-//importamos la accion
+// Importamos la accion
 import { pokemonsAction } from "../../actions/pokemonsAction";
+import { pokemonByTypeAction } from "../../actions/pokemonByTypeAction";
 import loading from "../../images/loading.gif";
 import style from "./Home.module.css";
+import Navbar from "../../components/Navbar/Navbar";
+import Card from "../../components/Card/Card";
+
+// {}
 
 const Home = () => {
-  //dispatch
+  const [pokemonType, setPokemonType] = useState("");
+  const [filterByType, setFilterByType] = useState([]);
+
+  // Dispatch
   const dispatch = useDispatch();
 
-  //selector
+  // Selector
   const pokemons = useSelector((state) => state.pokemons.data);
   const isLoading = useSelector((state) => state.pokemons.isLoading);
+  const pokemonsTypes = useSelector((state) => state.pokemonsByTypes.data);
 
   useEffect(() => {
-    dispatch(pokemonsAction());
+    if (pokemons.length === 0 || pokemonsTypes.length === 0) {
+      dispatch(pokemonsAction());
+      dispatch(pokemonByTypeAction());
+    }
   }, [dispatch]);
 
   if (isLoading) {
@@ -26,14 +38,18 @@ const Home = () => {
   }
 
   return (
-    <>
-      {pokemons
-        ? pokemons.map((pokemon) => {
-            return <h1>{pokemon.name}</h1>;
-          })
-        : "hola"}
-      <div>Home</div>
-    </>
+    <div>
+      <div>
+        <Navbar pokemonsTypes={pokemonsTypes} setPokemonType={setPokemonType} />
+      </div>
+      <div className={style.containerHome}>
+        {pokemons
+          ? pokemons.map((pokemon) => {
+              return <Card pokemon={pokemon} key={pokemon.id} />;
+            })
+          : "holaaa"}
+      </div>
+    </div>
   );
 };
 
