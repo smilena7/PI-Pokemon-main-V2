@@ -1,0 +1,59 @@
+.contentStatsDetail {
+  padding: 0 20px 0 20px;
+  margin-top: 40px;
+  margin-bottom: 80px;
+}
+
+.titleStatsDetail {
+  font-weight: bold;
+  font-size: 30px;
+  font-weight: bold;
+  padding-bottom: 5px;
+}
+
+.blockStatsDetail {
+  display: flex;
+  justify-content: space-between;
+  align-content: space-between;
+  flex-direction: row;
+  padding: 5px 0 5px 0;
+}
+
+.blockTitleStatsDetail {
+  width: 30%;
+  font-weight: bold;
+}
+
+.nameStatsDetail {
+  font-size: 15px;
+  font-weight: bold;
+  color: #6b6b6b;
+}
+
+.blockInfoStatsDetail {
+  width: 70%;
+  flex-direction: row;
+  align-items: center;
+  font-weight: bold;
+}
+
+.numberStatsDetail {
+  width: 12%;
+  font-size: 12px;
+}
+
+.bgBarStatsDetail {
+  background-color: #dedede;
+
+  width: 88%;
+  height: 5px;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.barStatsDetail {
+  /* background-color: red;
+  width: 40%; */
+  height: 5px;
+  border-radius: 20px;
+}

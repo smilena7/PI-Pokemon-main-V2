@@ -1,0 +1,38 @@
+.bg {
+  width: 100%;
+  height: 350px;
+  position: absolute;
+  border-end-end-radius: 300px;
+  border-end-start-radius: 300px;
+  background-color: #f6ff00;
+}
+
+.headerCardDetail {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 40px;
+}
+
+.nameCardDetail {
+  color: black;
+  font-weight: bold;
+  font-size: 27px;
+  left: 550px;
+  position: relative;
+}
+
+.contentImgCardDetail {
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  top: 30px;
+  left: 150px;
+
+  position: relative;
+}
+
+.imgCardDetail {
+  width: 250px;
+  height: 300px;
+}

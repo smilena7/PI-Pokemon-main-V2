@@ -19,14 +19,15 @@ import style from "./Home.module.css";
 // {}
 
 const Home = () => {
+  // Dispatch
+  const dispatch = useDispatch();
+
+  // Estados
   const [pokemonType, setPokemonType] = useState("");
   const [orderPokemonBy, setOrderPokemonBy] = useState("");
   const [createPokemonBy, setCreatePokemonBy] = useState("");
   const [page, setPage] = useState(1);
   const [porPage, setPorPage] = useState(12);
-
-  // Dispatch
-  const dispatch = useDispatch();
 
   // Selector
   let pokemons = useSelector((state) => state.pokemons.data);

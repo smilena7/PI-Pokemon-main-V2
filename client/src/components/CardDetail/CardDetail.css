@@ -1,0 +1,24 @@
+.containerCardDetail {
+  height: 100vh;
+  width: 100vw;
+  background-color: #f2f2f2;
+}
+
+.pokemon-image-container {
+  border: 1px solid #f2f2f2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.text-center {
+  margin: 20px 20px 20px 100px;
+}
+
+.pokemon-image-detail {
+  height: 400px;
+}
+
+.pokemon-box-details {
+}
