@@ -24,8 +24,10 @@ export const CardDetail = (props) => {
 
           <TypeDetail type={type} />
 
-          {/* <p>{height}</p>
-          <p>{weight}</p> */}
+          <div className="containerHeightWeight">
+            <p className="heightWeight">Altura: {height}</p>
+            <p className="heightWeight">Peso: {weight}</p>
+          </div>
         </div>
         <div className="pokemon-box-details">
           <StatsDetail
