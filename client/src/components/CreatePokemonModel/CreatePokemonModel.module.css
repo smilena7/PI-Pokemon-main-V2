@@ -1,0 +1,162 @@
+.backgroundCreatePortalModal {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  z-index: 1000;
+  top: 0;
+  bottom: 0;
+}
+
+.modalWrapper {
+  background: #f4d54c;
+  box-sizing: border-box;
+  z-index: 10;
+  background-position: 70% 30%;
+  border-radius: 5px;
+  overflow-x: auto;
+  width: 50%;
+  height: auto;
+
+  /* @media (max-width: 425px) {
+    height: 90vh;
+    width: 300px;
+    & .md-subtitle {
+      display: none;
+    }
+    & p {
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #383638;
+      padding-left: 16px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    height: auto;
+    width: 938px;
+    overflow: hidden;
+    & .sm-subtitle {
+      display: none;
+    }
+    & ._2OZcr {
+      display: flex;
+      justify-content: center;
+    }
+    & p {
+      margin-top: 5px;
+      margin-bottom: 15px;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      color: #383638;
+      padding-left: 32px;
+    }
+  } */
+}
+
+.containerTituloCreatePokemonModel {
+  display: flex;
+  justify-content: space-around;
+}
+
+.tituloCPM {
+  text-align: center;
+}
+
+.btonCPM {
+  background-color: red;
+  border: none;
+}
+
+.containerInputsCreatePokemonModel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: 500;
+}
+
+.danger label {
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  font-size: 17px;
+  color: red;
+  font-weight: 700;
+}
+
+form .danger input {
+  appearance: none;
+  text-align: center;
+  background-color: none;
+  border: 1px solid rgb(22, 160, 133);
+  line-height: 0;
+  font-size: 17px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  border-radius: 60px;
+  color: black;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  z-index: 1;
+}
+
+.question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  width: 100%;
+}
+
+.question label {
+  margin-right: 1em;
+}
+
+.question input {
+  margin-right: 1em;
+  border: 1px solid rgb(22, 160, 133);
+  border-radius: 10px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.contenerContenedor {
+  width: 35%;
+  margin: 0 auto;
+}
+
+.containerH1InputsCreatePokemonModel h1 {
+  margin-left: 2.5em;
+}
+
+.containerTiposCPM {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.submit {
+  width: 20%;
+  height: 20%;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px;
+  border: none;
+  background-color: #003060;
+  color: #eee;
+  border-radius: 8px;
+}
+
+.submit:hover {
+  background: #ddd;
+  color: #003060;
+  border: 2px solid #003060;
+}

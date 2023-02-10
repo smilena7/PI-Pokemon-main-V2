@@ -5,7 +5,7 @@ import { pokemonsAction } from "../../actions/pokemonsAction";
 
 import style from "./Search.module.css";
 
-const Search = () => {
+const Search = ({ setOpenModal }) => {
   const dispatch = useDispatch();
   const [namePokemon, setNamePokemon] = useState("");
 
@@ -43,7 +43,12 @@ const Search = () => {
             <button className={style.searchBtn} onClick={handleCleanPokemon}>
               Limpiar
             </button>
-            <button className={style.searchBtn}>Crea tu pokemón</button>
+            <button
+              className={style.searchBtn}
+              onClick={() => setOpenModal(true)}
+            >
+              Crea tu pokemón
+            </button>
           </div>
         </div>
       </form>

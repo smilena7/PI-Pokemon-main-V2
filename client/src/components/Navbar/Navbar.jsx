@@ -4,7 +4,12 @@ import { useDispatch } from "react-redux";
 import Search from "../Search/Search";
 import style from "./Navbar.module.css";
 
-const Navbar = ({ pokemonsTypes, setPokemonType, setOrderPokemonBy }) => {
+const Navbar = ({
+  pokemonsTypes,
+  setPokemonType,
+  setOrderPokemonBy,
+  setOpenModal,
+}) => {
   const dispatch = useDispatch();
 
   const handleFilterByType = (e) => {
@@ -22,7 +27,7 @@ const Navbar = ({ pokemonsTypes, setPokemonType, setOrderPokemonBy }) => {
   return (
     <div className={style.homeContainer}>
       <div>
-        <Search />
+        <Search setOpenModal={setOpenModal} />
       </div>
       <div className={style.createBy}>
         {/*  Filtrado por tipos */}

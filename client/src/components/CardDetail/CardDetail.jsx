@@ -1,35 +1,29 @@
 import React from "react";
-//import getColorByPokemonType from "../../utils/getColorByPokemonType";
 import TypeDetail from "../../components/TypeDetail/TypeDetail";
 import StatsDetail from "../../components/StatsDetail/StatsDetail";
-//import style from "./CardDetail.module.css";
-import "./CardDetail.css";
+import style from "./CardDetail.module.css";
 
 export const CardDetail = (props) => {
   const { id, name, type, img, hp, attack, defense, speed, height, weight } =
     props.pokemonDetail;
 
   return (
-    <div className="containerCardDetail">
-      <div className="pokemon-image-container">
+    <div className={style.containerCardDetail}>
+      <div className={style.pokemonImageContainer}>
         <div>
-          <h1 className="text-center">
+          <h1 className={style.textCenter}>
             N.º {id} - {name}
           </h1>
-          <img
-            src={img}
-            className="img-fluid pokemon-image-detail d-block mx-auto"
-            alt={name}
-          />
+          <img src={img} className={style.pokemonImageDetail} alt={name} />
 
           <TypeDetail type={type} />
 
-          <div className="containerHeightWeight">
-            <p className="heightWeight">Altura: {height}</p>
-            <p className="heightWeight">Peso: {weight}</p>
+          <div className={style.containerHeightWeight}>
+            <p className={style.heightWeight}>Altura: {height}</p>
+            <p className={style.heightWeight}>Peso: {weight}</p>
           </div>
         </div>
-        <div className="pokemon-box-details">
+        <div>
           <StatsDetail
             hp={hp}
             attack={attack}

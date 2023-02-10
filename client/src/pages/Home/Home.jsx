@@ -15,6 +15,7 @@ import Paged from "../../components/Paged/Paged";
 import { tipos, ordenado } from "../../utils/filtros";
 // Importando estilos
 import style from "./Home.module.css";
+import CreatePokemonModel from "../../components/CreatePokemonModel/CreatePokemonModel";
 
 // {}
 
@@ -28,6 +29,7 @@ const Home = () => {
   const [createPokemonBy, setCreatePokemonBy] = useState("");
   const [page, setPage] = useState(1);
   const [porPage, setPorPage] = useState(12);
+  const [openModal, setOpenModal] = useState(true);
 
   // Selector
   let pokemons = useSelector((state) => state.pokemons.data);
@@ -64,6 +66,7 @@ const Home = () => {
           setOrderPokemonBy={setOrderPokemonBy}
           setCreatePokemonBy={setCreatePokemonBy}
           createPokemonBy={createPokemonBy}
+          setOpenModal={setOpenModal}
         />
       </div>
       <div>
@@ -82,6 +85,7 @@ const Home = () => {
         )}
       </div>
       <Paged page={page} setPage={setPage} maxPage={maxPage} />
+      {openModal && <CreatePokemonModel setOpenModal={setOpenModal} />}
     </div>
   );
 };
