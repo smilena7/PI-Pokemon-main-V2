@@ -62,16 +62,15 @@
 
 .containerTituloCreatePokemonModel {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .tituloCPM {
   text-align: center;
 }
 
-.btonCPM {
-  background-color: red;
-  border: none;
+.closeCPM {
+  cursor: pointer;
 }
 
 .containerInputsCreatePokemonModel {

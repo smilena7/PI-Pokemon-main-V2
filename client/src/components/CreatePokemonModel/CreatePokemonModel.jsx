@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { pokemonCreateAction } from "../../actions/PokemonCreateAction";
+import close from "../../images/close.svg";
 
 import style from "./CreatePokemonModel.module.css";
 
@@ -71,18 +72,18 @@ const CreatePokemonModel = ({ setOpenModal }) => {
     <div className={style.backgroundCreatePortalModal}>
       <div className={style.modalWrapper}>
         <form action="POST" className={style.form} onSubmit={submit}>
-          {/* Titulo y boton */}
+          {/* Titulo e img */}
           <div>
             <div className={style.containerTituloCreatePokemonModel}>
               <h1 className={style.tituloCPM}>
-                Crea el Pokemón de tu preferencia:
+                Crea el Pokemón de tu preferencia
               </h1>
-              <button
-                className={style.btonCPM}
+              <img
+                src={close}
+                alt="close"
+                className={style.closeCPM}
                 onClick={() => setOpenModal(false)}
-              >
-                X
-              </button>
+              />
             </div>
 
             {/* labels e inputs */}
