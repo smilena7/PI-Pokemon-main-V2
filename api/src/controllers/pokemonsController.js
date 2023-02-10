@@ -203,8 +203,6 @@ const postPokemon = async function (req, res) {
 
 module.exports = { getAllPokemons, getPokemonID, getPokemonName, postPokemon };
 
-// {}
-
 /*
 
 - [ ] *GET /pokemons/{idPokemon}*:
