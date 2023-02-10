@@ -8,7 +8,7 @@ import { pokemonByTypeAction } from "../../actions/pokemonByTypeAction";
 import loading from "../../images/loading.gif";
 // Importando componentes
 import Navbar from "../../components/Navbar/Navbar";
-import Card from "../../components/Card/Card";
+import CardHome from "../../components/CardHome/CardHome";
 import Paged from "../../components/Paged/Paged";
 
 // Importando los filtrados de utils
@@ -75,7 +75,7 @@ const Home = () => {
               ? pokemons
                   .slice((page - 1) * porPage, (page - 1) * porPage + porPage)
                   .map((pokemon) => {
-                    return <Card pokemon={pokemon} key={pokemon.id} />;
+                    return <CardHome pokemon={pokemon} key={pokemon.id} />;
                   })
               : "holaaa"}
           </div>

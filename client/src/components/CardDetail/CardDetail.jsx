@@ -14,14 +14,18 @@ export const CardDetail = (props) => {
       <div className="pokemon-image-container">
         <div>
           <h1 className="text-center">
-            N.º {id} {name}
+            N.º {id} - {name}
           </h1>
           <img
             src={img}
             className="img-fluid pokemon-image-detail d-block mx-auto"
             alt={name}
           />
+
           <TypeDetail type={type} />
+
+          {/* <p>{height}</p>
+          <p>{weight}</p> */}
         </div>
         <div className="pokemon-box-details">
           <StatsDetail

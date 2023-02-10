@@ -1,4 +1,5 @@
 import React from "react";
+import ProgressBar from "../ProgressBar/ProgressBar";
 import style from "./StatsDetail.module.css";
 
 const StatsDetail = (props) => {
@@ -23,8 +24,11 @@ const StatsDetail = (props) => {
         </div>
         <div className={style.blockInfoStatsDetail}>
           <p className={style.numberStatsDetail}>{hp}</p>
-          <div className={style.bgBarStatsDetail}>
-            <div /* style={barStyles(hp)} */ />
+          <div>
+            <ProgressBar
+              bgcolor={hp >= 49 ? "#00ac17" : "#ff3e3e"}
+              progress={hp}
+            />
           </div>
         </div>
       </div>
@@ -36,8 +40,11 @@ const StatsDetail = (props) => {
         </div>
         <div className={style.blockInfoStatsDetail}>
           <p className={style.numberStatsDetail}>{attack}</p>
-          <div className={style.bgBarStatsDetail}>
-            <div /* style={[style.barStatsDetail, barStyles(attack)]} */ />
+          <div>
+            <ProgressBar
+              bgcolor={attack >= 49 ? "#00ac17" : "#ff3e3e"}
+              progress={attack}
+            />
           </div>
         </div>
       </div>
@@ -49,8 +56,11 @@ const StatsDetail = (props) => {
         </div>
         <div className={style.blockInfoStatsDetail}>
           <p className={style.numberStatsDetail}>{defense}</p>
-          <div className={style.bgBarStatsDetail}>
-            <div /* style={[style.barStatsDetail, barStyles(defense)]} */ />
+          <div>
+            <ProgressBar
+              bgcolor={defense >= 49 ? "#00ac17" : "#ff3e3e"}
+              progress={defense}
+            />
           </div>
         </div>
       </div>
@@ -62,8 +72,11 @@ const StatsDetail = (props) => {
         </div>
         <div className={style.blockInfoStatsDetail}>
           <p className={style.numberStatsDetail}>{speed}</p>
-          <div className={style.bgBarStatsDetail}>
-            <div /* style={[style.barStatsDetail, barStyles(speed)]} */ />
+          <div>
+            <ProgressBar
+              bgcolor={speed >= 49 ? "#00ac17" : "#ff3e3e"}
+              progress={speed}
+            />
           </div>
         </div>
       </div>

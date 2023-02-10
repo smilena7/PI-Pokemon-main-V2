@@ -1,0 +1,34 @@
+.homeContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100px;
+  padding: 2%;
+}
+.createBy {
+  display: flex;
+  gap: 1em;
+  padding: 2%;
+}
+
+.createBy select option {
+  padding: 2%;
+}
+
+select {
+  cursor: pointer;
+  box-shadow: none;
+  background: #003060;
+  width: 100%;
+  height: 4%;
+  font-size: 0.9em;
+  padding-top: 1em;
+  padding-right: 1.26em;
+  padding-bottom: 1em;
+  padding-left: 1em;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: bold;
+}

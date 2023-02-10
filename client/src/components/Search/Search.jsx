@@ -24,18 +24,27 @@ const Search = () => {
   };
 
   return (
-    <div className={style.container}>
+    <div className={style.containerSearch}>
       <form onSubmit={submit}>
-        <div className={style.field}>
-          <input
-            type="text"
-            id="searchterm"
-            value={namePokemon}
-            onChange={handleInputChange}
-            placeholder="Busca tu pokemón favorito..."
-          />
-          <input className={style.button} type="submit" value="Buscar" />
-          <button onClick={handleCleanPokemon}>Limpiar</button>
+        <div className={style.formContainer}>
+          <div>
+            <input
+              className={style.searchName}
+              type="text"
+              id="searchterm"
+              value={namePokemon}
+              onChange={handleInputChange}
+              placeholder="Escribe tu pokemón favorito..."
+            />
+          </div>
+          <div className={style.containerButtons}>
+            <button className={style.searchBtn} onClick={submit} value="Buscar">
+              Buscar
+            </button>
+            <button className={style.searchBtn} onClick={handleCleanPokemon}>
+              Limpiar
+            </button>
+          </div>
         </div>
       </form>
     </div>
