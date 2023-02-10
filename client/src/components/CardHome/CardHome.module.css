@@ -1,0 +1,12 @@
+.container {
+  cursor: pointer;
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+
+.imagen {
+  width: 10rem;
+  height: 10rem;
+}
