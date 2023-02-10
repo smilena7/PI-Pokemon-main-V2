@@ -133,6 +133,7 @@ form .danger input {
 }
 
 .containerH1InputsCreatePokemonModel h1 {
+  margin-bottom: 0.3em;
   margin-left: 2.5em;
 }
 
