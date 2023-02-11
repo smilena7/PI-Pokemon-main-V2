@@ -81,6 +81,16 @@
   font-weight: 500;
 }
 
+.stats::-webkit-outer-spin-button,
+.stats::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.stats[type="number"] {
+  -moz-appearance: textfield;
+}
+
 .danger label {
   font-weight: 100;
   letter-spacing: 0.01em;
@@ -123,7 +133,6 @@ form .danger input {
   border: 1px solid rgb(22, 160, 133);
   border-radius: 10px;
   font-weight: 500;
-  cursor: pointer;
 }
 
 .contenerContenedor {

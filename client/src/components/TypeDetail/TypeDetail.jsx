@@ -63,8 +63,8 @@ export const getTypeStyle = (type) => {
   return { backgroundColor, color: "#FFF", margin: "20px 20px 20px 150px" };
 };
 const TypeDetail = (props) => {
-  const { type } = props;
-
+  const { type, tipos } = props;
+  console.log("hola", tipos);
   return (
     <div>
       <p className={style.pokemonListDetail} style={getTypeStyle(type)}>

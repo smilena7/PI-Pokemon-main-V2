@@ -23,12 +23,12 @@ const CreatePokemonModel = ({ setOpenModal }) => {
   // Manejado los estados
   const [data, setData] = useState({
     name: "",
-    vida: 0,
-    fuerza: 0,
-    defensa: 0,
-    velocidad: 0,
-    altura: 0,
-    peso: 0,
+    vida: "",
+    fuerza: "",
+    defensa: "",
+    velocidad: "",
+    altura: "",
+    peso: "",
     tipos: [],
   });
   const [errors, setErrors] = useState({});
@@ -117,6 +117,8 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     name="vida"
                     value={data.vida}
                     onChange={handleInputChange}
+                    placeholder="0"
+                    className={style.stats}
                   />
                 </div>
                 <div className={style.question}>
@@ -126,6 +128,8 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     name="fuerza"
                     value={data.fuerza}
                     onChange={handleInputChange}
+                    placeholder="0"
+                    className={style.stats}
                   />
                 </div>
                 <div className={style.question}>
@@ -135,6 +139,8 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     name="defensa"
                     value={data.defensa}
                     onChange={handleInputChange}
+                    placeholder="0"
+                    className={style.stats}
                   />
                 </div>
                 <div className={style.question}>
@@ -144,6 +150,8 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     name="velocidad"
                     value={data.velocidad}
                     onChange={handleInputChange}
+                    placeholder="0"
+                    className={style.stats}
                   />
                 </div>
                 <div className={style.question}>
@@ -153,6 +161,8 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     name="altura"
                     value={data.altura}
                     onChange={handleInputChange}
+                    placeholder="0"
+                    className={style.stats}
                   />
                 </div>
                 <div className={style.question}>
@@ -162,6 +172,8 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     name="peso"
                     value={data.peso}
                     onChange={handleInputChange}
+                    placeholder="0"
+                    className={style.stats}
                   />
                 </div>
               </div>

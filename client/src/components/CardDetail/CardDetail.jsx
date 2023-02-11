@@ -5,75 +5,114 @@ import style from "./CardDetail.module.css";
 import { useSelector } from "react-redux";
 import loading from "../../images/loading.gif";
 
-export const CardDetail = (props) => {
-  const { id, name, type, img, hp, attack, defense, speed, height, weight } =
-    props.pokemonDetail;
+export const CardDetail = (props, { tipos }) => {
+  const {
+    id,
+    name,
+    type,
+    img,
+    imagen,
+    hp,
+    vida,
+    attack,
+    ataque,
+    defense,
+    defensa,
+    speed,
+    velocidad,
+    height,
+    altura,
+    weight,
+    peso,
+  } = props.pokemonDetail;
+  console.log("sjsjsjsjsj", tipos);
 
   const isLoading = useSelector((state) => state.pokemonDetail.isLoading);
 
   const getTypeStyle = (type) => {
     let backgroundColor = "";
+    let color = "";
     switch (type) {
       case "grass":
         backgroundColor = "#9bcc50";
+        color = "#FFF";
         break;
       case "poison":
         backgroundColor = "#b97fc9";
+        color = "#FFF";
         break;
       case "fire":
         backgroundColor = "#fd7d24";
+        color = "#FFF";
         break;
       case "flying":
         backgroundColor = "#3dc7ef";
+        color = "#FFF";
         break;
       case "water":
         backgroundColor = "#4592c4";
+        color = "#FFF";
         break;
       case "bug":
         backgroundColor = "#729f3f";
+        color = "#FFF";
         break;
       case "normal":
         backgroundColor = "#a4acaf";
+        color = "#FFF";
         break;
       case "electric":
         backgroundColor = "#eed535";
+        color = "#FFF";
         break;
       case "ground":
         backgroundColor = "#ab9842";
+        color = "#FFF";
         break;
       case "fairy":
         backgroundColor = "#fdb9e9";
+        color = "#FFF";
         break;
       case "fighting":
         backgroundColor = "#d56723";
+        color = "#FFF";
         break;
       case "psychic":
         backgroundColor = "#f366b9";
+        color = "#FFF";
         break;
       case "rock":
         backgroundColor = "#a38c21";
+        color = "#FFF";
         break;
       case "steel":
         backgroundColor = "#9eb7b8";
+        color = "#FFF";
         break;
       case "ghost":
         backgroundColor = "#7b62a3";
+        color = "#FFF";
         break;
       case "ice":
         backgroundColor = "#51c4e7";
+        color = "#FFF";
         break;
       case "dragon":
         backgroundColor = "#f16e57";
+        color = "#FFF";
         break;
 
       default:
-        backgroundColor = "#000";
+        backgroundColor = "#f2f2f2";
+        color = "#000000";
+
         break;
     }
-    return { backgroundColor, color: "#FFF" };
+    return { backgroundColor, color };
   };
 
   const stylos = getTypeStyle(type);
+
   return (
     <>
       {isLoading ? (
@@ -87,21 +126,25 @@ export const CardDetail = (props) => {
               <h1 className={style.textCenter}>
                 N.º {id} - {name}
               </h1>
-              <img src={img} className={style.pokemonImageDetail} alt={name} />
+              <img
+                src={img || imagen}
+                className={style.pokemonImageDetail}
+                alt={name}
+              />
 
-              <TypeDetail type={type} />
+              <TypeDetail tipos={tipos} type={type} />
 
               <div className={style.containerHeightWeight}>
-                <p className={style.heightWeight}>Altura: {height}</p>
-                <p className={style.heightWeight}>Peso: {weight}</p>
+                <p className={style.heightWeight}>Altura: {height || altura}</p>
+                <p className={style.heightWeight}>Peso: {weight || peso}</p>
               </div>
             </div>
             <div>
               <StatsDetail
-                hp={hp}
-                attack={attack}
-                defense={defense}
-                speed={speed}
+                hp={hp || vida}
+                attack={attack || ataque}
+                defense={defense || defensa}
+                speed={speed || velocidad}
               />
             </div>
           </div>
@@ -110,17 +153,3 @@ export const CardDetail = (props) => {
     </>
   );
 };
-
-/*  {/* <div>
-      <div className={style.bg}></div>
-      <div className={style.contentCardDetail}>
-        <div className={style.headerCardDetail}>
-          <h2 className={style.nameCardDetail}>{name}</h2>
-        </div>
-        <div className={style.contentImgCardDetail}>
-          <img src={img} className={style.imgCardDetail} alt={name} />
-        </div>
-      </div>
-      <TypeDetail type={type} />
-      <StatsDetail hp={hp} attack={attack} defense={defense} speed={speed} />
-    </div> } */

@@ -28,9 +28,16 @@ const getAllPokemons = async function (req, res) {
       });
     }
 
-    const dbData = await Pokemon.findAll();
+    const dbData = await Pokemon.findAll({
+      include: [
+        {
+          model: Tipo,
+          as: "Tipos",
+          attributes: ["name"],
+        },
+      ],
+    });
     const pokeDB = dbData.map((e) => e.dataValues);
-    console.log(pokeDB, "pokedb");
     const concatPokemons = pokemonsArray.concat(pokeDB);
 
     if (createBy === "HStudent") {
@@ -51,11 +58,20 @@ const getPokemonID = async function (req, res) {
 
   try {
     if (id.includes("-")) {
-      const db = await Pokemon.findByPk(id);
+      const db = await Pokemon.findByPk(id, {
+        include: [
+          {
+            model: Tipo,
+            as: "Tipos",
+            attributes: ["name"],
+          },
+        ],
+      });
+      console.log(db, "db");
       const pokemonDB = {
         id: db.id,
         name: db.name,
-        type: db.tipo,
+        type: db.type,
         imagen: db.imagen,
         vida: db.vida,
         ataque: db.ataque,
