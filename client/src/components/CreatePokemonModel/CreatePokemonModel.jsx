@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { pokemonCreateAction } from "../../actions/PokemonCreateAction";
+import { pokemonsAction } from "../../actions/pokemonsAction";
 import close from "../../images/close.svg";
 
 import style from "./CreatePokemonModel.module.css";
 
 const CreatePokemonModel = ({ setOpenModal }) => {
+  const dispatch = useDispatch();
+  const options = useSelector((state) => state.pokemonsByTypes.data);
+
   // Manejamos los errores
   const validate = (input) => {
     let errors = {};
@@ -63,9 +67,12 @@ const CreatePokemonModel = ({ setOpenModal }) => {
       });
     }
   };
+  console.log(data, "tipos");
 
   const submit = async (e) => {
     e.preventDefault();
+    dispatch(pokemonCreateAction(data));
+    dispatch(pokemonsAction());
   };
 
   return ReactDOM.createPortal(
@@ -165,15 +172,22 @@ const CreatePokemonModel = ({ setOpenModal }) => {
           <div className={style.containerH1InputsCreatePokemonModel}>
             <h1>Tipos:</h1>
             <div className={style.containerTiposCPM}>
-              <input
-                type="checkbox"
-                name="{tipos.name}"
-                value="{tipos...}"
-                id="{tipos...}"
-                onChange={checkbox}
-              />
-              <input type="submit" value="Crear" className={style.submit} />
+              {options?.map((type) => (
+                <div key={type.id} className={style.divInputTipos}>
+                  <input
+                    type="checkbox"
+                    name={type.name}
+                    value={type.name}
+                    id={type.id}
+                    onChange={checkbox}
+                  />
+                  <label htmlFor={type.name}>{type.name}</label>
+                </div>
+              ))}
             </div>
+          </div>
+          <div className={style.containButtonFooter}>
+            <input type="submit" value="Crear" className={style.submit} />
           </div>
         </form>
       </div>

@@ -29,7 +29,7 @@ const Home = () => {
   const [createPokemonBy, setCreatePokemonBy] = useState("");
   const [page, setPage] = useState(1);
   const [porPage, setPorPage] = useState(12);
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
 
   // Selector
   let pokemons = useSelector((state) => state.pokemons.data);
@@ -71,7 +71,9 @@ const Home = () => {
       </div>
       <div>
         {isLoading ? (
-          <img src={loading} alt="loading..." className={style.loading} />
+          <div className={style.containLoading}>
+            <img src={loading} alt="loading..." className={style.loading} />
+          </div>
         ) : (
           <div className={style.containerHome}>
             {pokemons
@@ -84,7 +86,9 @@ const Home = () => {
           </div>
         )}
       </div>
-      <Paged page={page} setPage={setPage} maxPage={maxPage} />
+      <div>
+        <Paged page={page} setPage={setPage} maxPage={maxPage} />
+      </div>
       {openModal && <CreatePokemonModel setOpenModal={setOpenModal} />}
     </div>
   );

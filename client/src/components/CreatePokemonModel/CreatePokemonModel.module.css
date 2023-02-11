@@ -62,7 +62,7 @@
 
 .containerTituloCreatePokemonModel {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 
 .tituloCPM {
@@ -133,22 +133,40 @@ form .danger input {
 
 .containerH1InputsCreatePokemonModel h1 {
   margin-bottom: 0.3em;
-  margin-left: 2.5em;
+  margin-left: 1.2em;
 }
 
 .containerTiposCPM {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(5, 120px);
   justify-content: center;
-  align-items: center;
   margin-bottom: 1em;
+}
+
+.divInputTipos {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+
+.divInputTipos input[type="checkbox"] {
+  cursor: pointer;
+}
+
+.containButtonFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem;
 }
 
 .submit {
   width: 20%;
-  height: 20%;
+  height: 30%;
   font-weight: bold;
+  font-size: 14px;
   cursor: pointer;
-  padding: 5px;
+  padding: 14px;
   border: none;
   background-color: #003060;
   color: #eee;

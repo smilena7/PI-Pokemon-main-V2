@@ -11,6 +11,7 @@ const CardHome = (props) => {
         <Link className={style.link} to={`/detail/${id}`}>
           <h2>{name}</h2>
           <p>{type}</p>
+
           <img className={style.imagen} src={imagen} alt={name} />
         </Link>
       </div>

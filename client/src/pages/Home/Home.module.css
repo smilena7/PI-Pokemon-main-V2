@@ -7,10 +7,16 @@
   margin: 2em auto;
 }
 
+.containLoading {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .loading {
-  position: absolute;
   padding-top: 5%;
-  left: 40%;
+  margin: 0 auto;
   width: 10rem;
   height: 10rem;
 }

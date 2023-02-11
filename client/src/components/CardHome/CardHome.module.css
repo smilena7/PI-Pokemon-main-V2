@@ -1,9 +1,35 @@
 .container {
   cursor: pointer;
+  background-color: #f2f2f2;
+  border: 1px solid #f2f2f2;
+  border-radius: 10px;
+  width: 85%;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
+
 .link {
   text-decoration: none;
   color: black;
+}
+
+.link h2 {
+  color: black;
+  padding: 8px 16px;
+  border-radius: 8px;
+  box-shadow: 0 5px 20px 3px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  text-align: center;
+  cursor: pointer;
+}
+
+.link p {
+  text-align: center;
+  font-weight: 500;
+  cursor: pointer;
 }
 
 .imagen {

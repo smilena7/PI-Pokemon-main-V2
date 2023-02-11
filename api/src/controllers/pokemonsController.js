@@ -30,6 +30,7 @@ const getAllPokemons = async function (req, res) {
 
     const dbData = await Pokemon.findAll();
     const pokeDB = dbData.map((e) => e.dataValues);
+    console.log(pokeDB, "pokedb");
     const concatPokemons = pokemonsArray.concat(pokeDB);
 
     if (createBy === "HStudent") {
