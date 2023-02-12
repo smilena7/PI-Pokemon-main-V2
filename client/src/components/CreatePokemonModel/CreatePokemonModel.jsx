@@ -67,7 +67,6 @@ const CreatePokemonModel = ({ setOpenModal }) => {
       });
     }
   };
-  console.log(data, "tipos");
 
   const submit = async (e) => {
     e.preventDefault();

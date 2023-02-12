@@ -15,7 +15,6 @@ const Detail = () => {
 
   useEffect(() => {
     let hasValue = Object.entries(pokemonDetail).length === 0;
-    console.log(Object.entries(pokemonDetail), "has");
     if (hasValue) return dispatch(pokemonDetailAction(id));
   }, [dispatch, id]);
 

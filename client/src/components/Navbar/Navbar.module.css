@@ -21,7 +21,7 @@ select {
   cursor: pointer;
   box-shadow: none;
   background: #003060;
-  width: 100%;
+  width: auto;
   font-size: 0.9em;
   padding-top: 1em;
   padding-right: 1.26em;

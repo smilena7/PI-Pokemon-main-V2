@@ -8,6 +8,7 @@ const Paged = ({ page, setPage, maxPage }) => {
     if (e.keyCode === 4) {
       setPage(parseInt(e.target.value));
       if (
+        // en caso dado de que el numero sea menor a 1 o mayor al amximo o no sea un numero, entonces:
         parseInt(e.target.value < 1) ||
         parseInt(e.target.value) > Math.ceil(maxPage) ||
         isNaN(parseInt(e.target.value))
@@ -46,7 +47,7 @@ const Paged = ({ page, setPage, maxPage }) => {
         onKeyDown={(e) => onKeyDown(e)}
         onChange={(e) => onChange(e)}
         name="page"
-        autoCapitalize="off"
+        autoComplete="off"
         value={input}
       />
       <p>de 4</p>

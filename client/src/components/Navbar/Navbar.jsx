@@ -33,13 +33,12 @@ const Navbar = ({
         {/*  Filtrado por tipos */}
         <select name="" id="" onChange={(e) => handleFilterByType(e)}>
           <option value="">Tipos:</option>
-          {pokemonsTypes.map((type) => (
+          {pokemonsTypes?.map((type) => (
             <option value={type.name} key={type.id}>
               {type.name}
             </option>
           ))}
         </select>
-
         {/*  Ordenado por existente o creado por nosotros */}
         <select name="" id="" onChange={(e) => handleCreateBy(e)}>
           <option value="creado">Creado por:</option>
