@@ -35,23 +35,21 @@ const Search = ({ setOpenModal }) => {
             onChange={handleInputChange}
             placeholder="Escribe tu pokemón favorito..."
           />
-
           <div className={style.containerButtons}>
-            <button className={style.searchBtn} onClick={submit} value="Buscar">
+            <button className={style.searchBtn} type="submit" value="Buscar">
               Buscar
-            </button>
-            <button className={style.searchBtn} onClick={handleCleanPokemon}>
-              Limpiar
-            </button>
-            <button
-              className={style.searchBtn}
-              onClick={() => setOpenModal(true)}
-            >
-              Crea tu pokemón
             </button>
           </div>
         </div>
       </form>
+      <div>
+        <button className={style.searchBtn} onClick={handleCleanPokemon}>
+          Limpiar
+        </button>
+        <button className={style.searchBtn} onClick={() => setOpenModal(true)}>
+          Crea tu pokemón
+        </button>
+      </div>
     </div>
   );
 };

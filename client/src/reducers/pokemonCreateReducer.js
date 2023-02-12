@@ -3,6 +3,7 @@ import {
   POST_POKEMON_CREATE,
   IS_LOADING_POKEMON_CREATE,
   ERROR_POKEMON_CREATE,
+  CLEAR_STATE_CREATE,
 } from "../types";
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
 };
 
 const pokemonCreateReducer = (state = initialState, action) => {
+  console.log(action.payload, "action");
   switch (action.type) {
     case POST_POKEMON_CREATE:
       return {
@@ -33,6 +35,9 @@ const pokemonCreateReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+
+    case CLEAR_STATE_CREATE:
+      return initialState;
 
     default:
       return state;

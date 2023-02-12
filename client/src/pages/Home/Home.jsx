@@ -16,6 +16,8 @@ import { tipos, ordenado } from "../../utils/filtros";
 // Importando estilos
 import style from "./Home.module.css";
 import CreatePokemonModel from "../../components/CreatePokemonModel/CreatePokemonModel";
+import { clearDetailPoKemon } from "../../actions/pokemonDetailAction";
+import { clearCreatePoKemon } from "../../actions/PokemonCreateAction";
 
 // {}
 
@@ -35,6 +37,8 @@ const Home = () => {
   let pokemons = useSelector((state) => state.pokemons.data);
   const isLoading = useSelector((state) => state.pokemons.isLoading);
   const pokemonsTypes = useSelector((state) => state.pokemonsByTypes.data);
+  const pokemonDetail = useSelector((state) => state.pokemonDetail.data);
+  const pokemonCreate = useSelector((state) => state.pokemonCreate.data);
 
   // Filtrando los tipos de pokemons
   if (pokemonType) pokemons = tipos(pokemonType, pokemons);
@@ -45,7 +49,14 @@ const Home = () => {
       dispatch(pokemonsAction());
       dispatch(pokemonByTypeAction());
     }
-  }, [dispatch]);
+    if (pokemonDetail.id) {
+      dispatch(clearDetailPoKemon());
+    }
+    if (pokemonCreate.id) {
+      //dispatch(clearCreatePoKemon());
+      setOpenModal(false);
+    }
+  }, [dispatch, pokemonCreate, pokemonDetail]);
 
   /*  if (isLoading) {
     return (

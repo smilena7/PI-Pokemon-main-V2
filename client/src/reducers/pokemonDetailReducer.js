@@ -3,6 +3,7 @@ import {
   GET_POKEMON_DETAIL,
   IS_LOADING_POKEMON_DETAIL,
   ERROR_POKEMON_DETAIL,
+  CLEAR_STATE_DETAIL,
 } from "../types";
 
 const initialState = {
@@ -33,6 +34,8 @@ const pokemonDetailReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+    case CLEAR_STATE_DETAIL:
+      return initialState;
 
     default:
       return state;

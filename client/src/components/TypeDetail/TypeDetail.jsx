@@ -60,17 +60,30 @@ export const getTypeStyle = (type) => {
       backgroundColor = "#000";
       break;
   }
-  return { backgroundColor, color: "#FFF", margin: "20px 20px 20px 150px" };
+  return { backgroundColor, color: "#FFF", margin: "20px 20px 20px 20px" };
 };
 const TypeDetail = (props) => {
-  const { type, tipos } = props;
-  console.log("hola", tipos);
+  const { type, Tipos } = props;
+  const tipoDb = Tipos?.map((tipo) => tipo.name);
+  console.log("hola", tipoDb);
   return (
-    <div>
-      <p className={style.pokemonListDetail} style={getTypeStyle(type)}>
-        {type}
-      </p>
-    </div>
+    <>
+      <div style={{ marginLeft: "120px" }}>
+        <p className={style.pokemonListDetail} style={getTypeStyle(type)}>
+          {type}
+        </p>
+      </div>
+      <div className={style.containArray}>
+        {Tipos?.map((tipo) => (
+          <p
+            className={style.pokemonListDetailArray}
+            style={getTypeStyle(type)}
+          >
+            {tipo.name}
+          </p>
+        ))}
+      </div>
+    </>
   );
 };
 

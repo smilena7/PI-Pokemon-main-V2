@@ -9,3 +9,23 @@
   align-items: center;
   border: 1px solid rgba(255, 255, 255, 0.5);
 }
+
+.containArray {
+  display: grid;
+  grid-template-columns: repeat(3, 120px);
+  gap: 20px;
+}
+
+.pokemonListDetailArray {
+  background-color: red;
+  text-align: center;
+  border-width: 0px;
+  width: 5rem;
+  color: white;
+  padding: 8px 16px;
+  margin-top: 3px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px 3px rgb(0 0 0 / 20%);
+  align-items: center;
+  font-size: 1em;
+}

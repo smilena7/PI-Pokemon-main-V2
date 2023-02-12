@@ -5,11 +5,12 @@ import style from "./CardDetail.module.css";
 import { useSelector } from "react-redux";
 import loading from "../../images/loading.gif";
 
-export const CardDetail = (props, { tipos }) => {
+export const CardDetail = (props) => {
   const {
     id,
     name,
     type,
+    Tipos,
     img,
     imagen,
     hp,
@@ -25,7 +26,6 @@ export const CardDetail = (props, { tipos }) => {
     weight,
     peso,
   } = props.pokemonDetail;
-  console.log("sjsjsjsjsj", tipos);
 
   const isLoading = useSelector((state) => state.pokemonDetail.isLoading);
 
@@ -132,7 +132,7 @@ export const CardDetail = (props, { tipos }) => {
                 alt={name}
               />
 
-              <TypeDetail tipos={tipos} type={type} />
+              <TypeDetail Tipos={Tipos} type={type} />
 
               <div className={style.containerHeightWeight}>
                 <p className={style.heightWeight}>Altura: {height || altura}</p>

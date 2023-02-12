@@ -41,6 +41,10 @@
   margin: 1em 0 0 3em;
 }
 
+.pokemonListDetail {
+  margin: "20px 20px 20px 150px";
+}
+
 .heightWeight {
   background-color: #fd7d24;
   text-align: center;

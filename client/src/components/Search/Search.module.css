@@ -1,3 +1,7 @@
+.containerSearch {
+  display: flex;
+}
+
 .formContainer {
   display: flex;
   box-sizing: border-box;

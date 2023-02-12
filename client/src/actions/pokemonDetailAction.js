@@ -3,6 +3,7 @@ import {
   GET_POKEMON_DETAIL,
   IS_LOADING_POKEMON_DETAIL,
   ERROR_POKEMON_DETAIL,
+  CLEAR_STATE_DETAIL,
 } from "../types";
 
 export const pokemonDetailAction = (id) => async (dispatch) => {
@@ -23,4 +24,10 @@ export const pokemonDetailAction = (id) => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+export const clearDetailPoKemon = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_STATE_DETAIL,
+  });
 };

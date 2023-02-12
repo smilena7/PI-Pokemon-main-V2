@@ -3,6 +3,7 @@ import {
   POST_POKEMON_CREATE,
   IS_LOADING_POKEMON_CREATE,
   ERROR_POKEMON_CREATE,
+  CLEAR_STATE_CREATE,
 } from "../types";
 
 export const pokemonCreateAction = (data) => async (dispatch) => {
@@ -34,4 +35,10 @@ export const pokemonCreateAction = (data) => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+export const clearCreatePoKemon = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_STATE_CREATE,
+  });
 };
