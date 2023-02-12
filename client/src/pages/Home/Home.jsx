@@ -4,22 +4,19 @@ import { useDispatch, useSelector } from "react-redux";
 // Importando la accion
 import { pokemonsAction } from "../../actions/pokemonsAction";
 import { pokemonByTypeAction } from "../../actions/pokemonByTypeAction";
+import { clearDetailPoKemon } from "../../actions/pokemonDetailAction";
+import { clearCreatePoKemon } from "../../actions/PokemonCreateAction";
 // Importando imagenes
 import loading from "../../images/loading.gif";
 // Importando componentes
 import Navbar from "../../components/Navbar/Navbar";
 import CardHome from "../../components/CardHome/CardHome";
 import Paged from "../../components/Paged/Paged";
-
+import CreatePokemonModel from "../../components/CreatePokemonModel/CreatePokemonModel";
 // Importando los filtrados de utils
 import { tipos, ordenado } from "../../utils/filtros";
 // Importando estilos
 import style from "./Home.module.css";
-import CreatePokemonModel from "../../components/CreatePokemonModel/CreatePokemonModel";
-import { clearDetailPoKemon } from "../../actions/pokemonDetailAction";
-import { clearCreatePoKemon } from "../../actions/PokemonCreateAction";
-
-// {}
 
 const Home = () => {
   // Dispatch
@@ -40,7 +37,7 @@ const Home = () => {
   const pokemonDetail = useSelector((state) => state.pokemonDetail.data);
   const pokemonCreate = useSelector((state) => state.pokemonCreate.data);
 
-  // Filtrando los tipos de pokemons
+  // Filtrando los tipos de pokemons (el filtro lo realizo en utils)
   if (pokemonType) pokemons = tipos(pokemonType, pokemons);
   if (orderPokemonBy) pokemons = ordenado(orderPokemonBy, pokemons);
 
@@ -58,13 +55,6 @@ const Home = () => {
     }
   }, [dispatch, pokemonCreate, pokemonDetail]);
 
-  /*  if (isLoading) {
-    return (
-      <>
-        <img src={loading} alt="loading..." className={style.loading} />
-      </>
-    );
-  } */
   // Paginado
   const maxPage = pokemons.length / porPage;
 
@@ -93,7 +83,7 @@ const Home = () => {
                   .map((pokemon) => {
                     return <CardHome pokemon={pokemon} key={pokemon.id} />;
                   })
-              : "holaaa"}
+              : ""}
           </div>
         )}
       </div>
