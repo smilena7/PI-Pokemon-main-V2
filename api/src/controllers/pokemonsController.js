@@ -67,11 +67,11 @@ const getPokemonID = async function (req, res) {
           },
         ],
       });
-      console.log(db, "db");
+      //console.log(db.dataValues.Tipos, "db");
       const pokemonDB = {
         id: db.id,
         name: db.name,
-        type: db.type,
+        Tipos: db.Tipos,
         imagen: db.imagen,
         vida: db.vida,
         ataque: db.ataque,
