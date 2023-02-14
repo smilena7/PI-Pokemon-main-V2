@@ -68,7 +68,6 @@ const getPokemonID = async function (req, res) {
           },
         ],
       });
-      //console.log(db.dataValues.Tipos, "db");
       const pokemonDB = {
         id: db.id,
         name: db.name,
@@ -90,7 +89,7 @@ const getPokemonID = async function (req, res) {
         name: pokeApiID.name,
         type: pokeApiID.types[0].type.name,
         img: pokeApiID.sprites.other["official-artwork"].front_default,
-        hp: pokeApiID.stats[0].base_stat, // accedemos a la informde la api desde api
+        hp: pokeApiID.stats[0].base_stat, // accedemos a la info de la api desde api
         attack: pokeApiID.stats[1].base_stat,
         defense: pokeApiID.stats[2].base_stat,
         speed: pokeApiID.stats[5].base_stat,
@@ -143,7 +142,7 @@ const getPokemonName = async function (req, res) {
       } catch (err) {
         res.status(404).send({ message: "No se encontró este Pokemón" });
       }
-    } // 5.2 Debe estar en la api si no esta en la db
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

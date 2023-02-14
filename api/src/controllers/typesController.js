@@ -7,15 +7,6 @@ const getAllTypes = async function (req, res) {
     const typesApi = await axios("https://pokeapi.co/api/v2/type");
     const types = typesApi.data.results;
 
-    /*  // Llamamos a cada uno de los pokemons por url
-    let typesArray = [];
-
-    // Pero primero necesitamos extraer la url de cada pokemon
-    for await (const type of types) {
-      const { data } = await axios(type.url);
-      typesArray.push(data);
-    } */
-
     // 2. Iteramos los tipos de la api para buscar o crear un tipo
     types.forEach((e) => {
       Tipo.findOrCreate({
@@ -33,8 +24,6 @@ const getAllTypes = async function (req, res) {
 };
 
 module.exports = getAllTypes;
-
-// {}
 
 /**
  - [ ] **GET /types**:
