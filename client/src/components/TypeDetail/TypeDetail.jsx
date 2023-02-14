@@ -64,7 +64,6 @@ export const getTypeStyle = (type) => {
 };
 const TypeDetail = (props) => {
   const { type, Tipos } = props;
-  const tipoDb = Tipos?.map((tipo) => tipo.name);
 
   return (
     <>

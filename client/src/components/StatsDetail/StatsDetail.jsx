@@ -5,14 +5,6 @@ import style from "./StatsDetail.module.css";
 const StatsDetail = (props) => {
   const { hp, attack, defense, speed } = props;
 
-  /* const barStyles = (num) => {
-    const color = num > 49 ? "#00ac17" : "#ff3e3e";
-    return {
-      backgroundColor: color,
-      width: `${num}%`,
-    };
-  }; */
-
   return (
     <div className={style.contentStatsDetail}>
       <p className={style.titleStatsDetail}>Base Stats:</p>

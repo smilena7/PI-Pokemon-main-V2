@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import style from "./CardHome.module.css";
 
 const CardHome = (props) => {
-  const { id, name, type, imagen } = props.pokemon;
+  const { id, name, type, Tipos, imagen } = props.pokemon;
 
   return (
     <>
       <div className={style.container}>
         <Link className={style.link} to={`/detail/${id}`}>
           <h2>{name}</h2>
-          <p>{type}</p>
+          <p>{type || Tipos[0]?.name}</p>
           <img className={style.imagen} src={imagen} alt={name} />
         </Link>
       </div>
