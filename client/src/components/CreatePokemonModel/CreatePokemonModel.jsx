@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { pokemonCreateAction } from "../../actions/PokemonCreateAction";
@@ -8,11 +8,14 @@ import close from "../../images/close.svg";
 import style from "./CreatePokemonModel.module.css";
 
 const CreatePokemonModel = ({ setOpenModal }) => {
+  const [errors, setErrors] = useState({});
+
   const dispatch = useDispatch();
   const options = useSelector((state) => state.pokemonsByTypes.data);
 
   // Manejamos los errores
   const validate = (input) => {
+    console.log(!input, "input");
     let errors = {};
     if (!input.name) {
       errors.name = "El nombre del pokemón es necesario";
@@ -31,27 +34,25 @@ const CreatePokemonModel = ({ setOpenModal }) => {
     peso: "",
     tipos: [],
   });
-  const [errors, setErrors] = useState({});
 
   const handleInputChange = (e) => {
-    if (e.target.name !== "name") {
-      setData({
-        ...data,
-        [e.target.name]: Number(e.target.value) <= 0 ? 0 : e.target.value,
-      });
-    } else {
-      setErrors(
-        validate({
-          ...data,
-          [e.target.name]: e.target.value,
-        })
-      );
-      setData({
+    setData({
+      ...data,
+      [e.target.name]: e.target.value,
+    });
+    setErrors(
+      validate({
         ...data,
         [e.target.name]: e.target.value,
-      });
-    }
+      })
+    );
   };
+  /* 
+  useEffect(() => {
+    if (errors.name) {
+      alert(errors.name);
+    }
+  }, [errors.name]); */
 
   const checkbox = (e) => {
     if (data.tipos.includes(e.target.value)) {
@@ -70,14 +71,16 @@ const CreatePokemonModel = ({ setOpenModal }) => {
 
   const submit = async (e) => {
     e.preventDefault();
-    dispatch(pokemonCreateAction(data));
-    dispatch(pokemonsAction());
+    if (!errors.name) {
+      dispatch(pokemonCreateAction(data));
+      dispatch(pokemonsAction());
+    }
   };
 
   return ReactDOM.createPortal(
     <div className={style.backgroundCreatePortalModal}>
       <div className={style.modalWrapper}>
-        <form action="POST" className={style.form} onSubmit={submit}>
+        <form action="POST" className={style.form} onSubmit={(e) => submit(e)}>
           {/* Titulo e img */}
           <div>
             <div className={style.containerTituloCreatePokemonModel}>
@@ -95,7 +98,7 @@ const CreatePokemonModel = ({ setOpenModal }) => {
             {/* labels e inputs */}
             <div className={style.contenerContenedor}>
               <div className={style.containerInputsCreatePokemonModel}>
-                <div className={errors.name ? style.danger : style.question}>
+                <div className={style.question}>
                   <label>Nombre:</label>
                   <input
                     type="text"
@@ -103,11 +106,11 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     name="name"
                     value={data.name}
                     onChange={handleInputChange}
-                    required
+                    className={errors.name ? style.inputErros : ""}
                   />
                 </div>
                 {errors.name ? (
-                  <p className="danger">{errors.username}</p>
+                  <p className={style.danger}>{errors.name}</p>
                 ) : null}
                 <div className={style.question}>
                   <label>Vida:</label>

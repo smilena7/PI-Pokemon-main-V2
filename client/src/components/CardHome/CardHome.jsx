@@ -10,7 +10,7 @@ const CardHome = (props) => {
       <div className={style.container}>
         <Link className={style.link} to={`/detail/${id}`}>
           <h2>{name}</h2>
-          <p>{type || Tipos[0]?.name}</p>
+          <p>{type || (Tipos && Tipos[0]?.name)}</p>
           <img className={style.imagen} src={imagen} alt={name} />
         </Link>
       </div>

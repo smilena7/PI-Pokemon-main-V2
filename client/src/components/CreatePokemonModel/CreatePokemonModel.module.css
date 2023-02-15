@@ -99,6 +99,11 @@
   font-weight: 700;
 }
 
+.danger {
+  color: red;
+  font-size: 10px;
+}
+
 form .danger input {
   appearance: none;
   text-align: center;

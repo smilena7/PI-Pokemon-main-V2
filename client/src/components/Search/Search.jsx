@@ -57,3 +57,9 @@ const Search = ({ setOpenModal }) => {
 export default Search;
 
 // rafce = shortcut arrow function
+/**
+ function validation(input) {
+  const errors = {};
+ else if (input.username > 35) {
+    errors.username = "El username no puede tener más de 35 caracteres";
+ */
