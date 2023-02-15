@@ -17,7 +17,7 @@ const Detail = () => {
     let hasValue = Object.entries(pokemonDetail).length === 0;
     if (hasValue) return dispatch(pokemonDetailAction(id));
   }, [dispatch, id]);
-  //comentario
+
   return (
     <div className={style.containerDetail}>
       <CardDetail pokemonDetail={pokemonDetail} />
