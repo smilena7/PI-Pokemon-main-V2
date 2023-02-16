@@ -9,6 +9,7 @@ const Navbar = ({
   setPokemonType,
   setOrderPokemonBy,
   setOpenModal,
+  clearPoKemonName,
 }) => {
   const dispatch = useDispatch();
 
@@ -27,7 +28,10 @@ const Navbar = ({
   return (
     <div className={style.homeContainer}>
       <div>
-        <Search setOpenModal={setOpenModal} />
+        <Search
+          setOpenModal={setOpenModal}
+          clearPoKemonName={clearPoKemonName}
+        />
       </div>
       <div className={style.createBy}>
         {/*  Filtrado por tipos */}

@@ -21,7 +21,22 @@
   height: 10rem;
 }
 
-@media (min-width: 768px) {
-  .containerHome {
-  }
+.containPikachu {
+  padding: 100px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.pikachu {
+  margin: 0 auto;
+  width: 15rem;
+  height: 15rem;
+}
+
+.txtErrorName {
+  padding-top: 1%;
+  font-weight: 500;
+  font-size: 1.8rem;
 }

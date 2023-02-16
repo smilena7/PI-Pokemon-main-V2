@@ -3,6 +3,7 @@ import {
   GET_POKEMON_BY_NAME,
   IS_LOADING_POKEMON_NAME,
   ERROR_POKEMON_NAME,
+  CLEAR_ERROR_POKEMON_NAME,
 } from "../types";
 
 const initialState = {
@@ -33,6 +34,9 @@ const pokemonByNameReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+
+    case CLEAR_ERROR_POKEMON_NAME:
+      return initialState;
 
     default:
       return state;

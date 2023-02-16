@@ -5,11 +5,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { pokemonsAction } from "../../actions/pokemonsAction";
 import { pokemonByTypeAction } from "../../actions/pokemonByTypeAction";
 import { clearDetailPoKemon } from "../../actions/pokemonDetailAction";
-import { clearCreatePoKemon } from "../../actions/PokemonCreateAction";
+//import { clearCreatePoKemon } from "../../actions/PokemonCreateAction";
 import { clearAllPoKemons } from "../../actions/pokemonsAction";
+import { clearPoKemonName } from "../../actions/pokemonByNameAction";
 
 // Importando imagenes
 import loading from "../../images/loading.gif";
+import pikachu from "../../images/pikachu.png";
+
 // Importando componentes
 import Navbar from "../../components/Navbar/Navbar";
 import CardHome from "../../components/CardHome/CardHome";
@@ -36,11 +39,13 @@ const Home = () => {
   // Selector
   let pokemons = useSelector((state) => state.pokemons.data);
   const isLoading = useSelector((state) => state.pokemons.isLoading);
+  const isLoadingName = useSelector((state) => state.pokemonName.isLoading);
   const pokemonsTypes = useSelector((state) => state.pokemonsByTypes.data);
   const pokemonDetail = useSelector((state) => state.pokemonDetail.data);
   const pokemonCreate = useSelector((state) => state.pokemonCreate.data);
   const pokemonsError = useSelector((state) => state.pokemons.error);
-  console.log(pokemonsError);
+  const pokemonNameError = useSelector((state) => state.pokemonName.error);
+  console.log(pokemonNameError);
 
   // Filtrando los tipos de pokemons (el filtro lo realizo en utils)
   if (pokemonType) pokemons = tipos(pokemonType, pokemons);
@@ -72,13 +77,19 @@ const Home = () => {
           setOrderPokemonBy={setOrderPokemonBy}
           setCreatePokemonBy={setCreatePokemonBy}
           createPokemonBy={createPokemonBy}
+          clearPoKemonName={clearPoKemonName}
           setOpenModal={setOpenModal}
         />
       </div>
       <div>
-        {isLoading ? (
+        {isLoading || isLoadingName ? (
           <div className={style.containLoading}>
             <img src={loading} alt="loading..." className={style.loading} />
+          </div>
+        ) : pokemonNameError ? (
+          <div className={style.containPikachu}>
+            <img className={style.pikachu} src={pikachu} alt="pikachu" />
+            <div className={style.txtErrorName}>{pokemonNameError}</div>
           </div>
         ) : (
           <div className={style.containerHome}>

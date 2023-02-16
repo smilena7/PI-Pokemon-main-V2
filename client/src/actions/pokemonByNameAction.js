@@ -3,6 +3,7 @@ import {
   GET_POKEMON_BY_NAME,
   IS_LOADING_POKEMON_NAME,
   ERROR_POKEMON_NAME,
+  CLEAR_ERROR_POKEMON_NAME,
 } from "../types";
 
 export const pokemonByNameAction = (name) => async (dispatch) => {
@@ -23,4 +24,10 @@ export const pokemonByNameAction = (name) => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+export const clearPoKemonName = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_ERROR_POKEMON_NAME,
+  });
 };

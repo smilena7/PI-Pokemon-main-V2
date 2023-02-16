@@ -5,7 +5,7 @@ import { pokemonsAction } from "../../actions/pokemonsAction";
 
 import style from "./Search.module.css";
 
-const Search = ({ setOpenModal }) => {
+const Search = ({ setOpenModal, clearPoKemonName }) => {
   const dispatch = useDispatch();
   const [namePokemon, setNamePokemon] = useState("");
 
@@ -21,6 +21,7 @@ const Search = ({ setOpenModal }) => {
 
   const handleCleanPokemon = (e) => {
     dispatch(pokemonsAction());
+    dispatch(clearPoKemonName());
   };
 
   return (
