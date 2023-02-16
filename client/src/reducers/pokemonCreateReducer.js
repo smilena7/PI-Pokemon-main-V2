@@ -13,7 +13,6 @@ const initialState = {
 };
 
 const pokemonCreateReducer = (state = initialState, action) => {
-  console.log(action.payload, "action");
   switch (action.type) {
     case POST_POKEMON_CREATE:
       return {

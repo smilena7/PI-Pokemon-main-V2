@@ -11,4 +11,3 @@ export default combineReducers({
   pokemonDetail: pokemonDetailReducer,
   pokemonCreate: pokemonCreateReducer,
 });
-// {}
