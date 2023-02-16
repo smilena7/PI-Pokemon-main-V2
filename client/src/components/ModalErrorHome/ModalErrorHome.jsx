@@ -2,7 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { useDispatch } from "react-redux";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import close from "../../images/close.svg";
+import x from "../../images/x.svg";
+import errorSvg from "../../images/error.svg";
+
 import style from "./ModalErrorHome.module.css";
 
 const ModalErrorHome = ({ error, closeModal }) => {
@@ -23,13 +25,24 @@ const ModalErrorHome = ({ error, closeModal }) => {
   return ReactDOM.createPortal(
     <div className={style.bagModalErrorHome}>
       <div className={style.modalWrapper}>
-        {error}
-        <img
-          src={close}
-          alt="close"
-          className={style.close}
-          onClick={() => handleCloseMoDal()}
-        />
+        <div className={style.containerError}>
+          <div className={style.error}>Error</div>
+          <div>
+            <img
+              src={x}
+              alt="close"
+              className={style.close}
+              onClick={() => handleCloseMoDal()}
+            />
+          </div>
+        </div>
+        <div className={style.containerTxtError}>
+          <img src={errorSvg} alt="error" className={style.erroSvg} />
+          <p className={style.txt}>{error}</p>
+          <button className={style.ok} onClick={() => handleCloseMoDal()}>
+            Aceptar
+          </button>
+        </div>
       </div>
     </div>,
     document.getElementById("root")
