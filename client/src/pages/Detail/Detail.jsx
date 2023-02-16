@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { pokemonDetailAction } from "../../actions/pokemonDetailAction";
+import {
+  clearDetailPoKemon,
+  pokemonDetailAction,
+} from "../../actions/pokemonDetailAction";
 import { CardDetail } from "../../components/CardDetail/CardDetail";
+import ModalErrorHome from "../../components/ModalErrorHome/ModalErrorHome";
 
 import style from "./Detail.module.css";
 
 const Detail = () => {
   const dispatch = useDispatch();
   const pokemonDetail = useSelector((state) => state.pokemonDetail.data);
+  const pokemonDetailError = useSelector((state) => state.pokemonDetail.error);
 
   const { id } = useParams();
   const [pokeDetail, setPokeDetail] = useState({});
@@ -21,6 +26,13 @@ const Detail = () => {
   return (
     <div className={style.containerDetail}>
       <CardDetail pokemonDetail={pokemonDetail} />
+      {/* Manejo del error en el front */}
+      {pokemonDetailError && (
+        <ModalErrorHome
+          error={pokemonDetailError}
+          closeModal={clearDetailPoKemon}
+        />
+      )}
     </div>
   );
 };

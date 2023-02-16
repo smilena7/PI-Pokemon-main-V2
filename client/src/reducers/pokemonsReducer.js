@@ -6,6 +6,7 @@ import {
   GET_CREATE_POKEMONS_BY,
   ERROR_CREATE_POKEMONS_BY,
   GET_POKEMON_BY_NAME,
+  CLEAR_STATE_ERROR_ALL_POKEMONS,
 } from "../types";
 
 const initialState = {
@@ -58,6 +59,9 @@ const pokemonsReducer = (state = initialState, action) => {
         isLoading: false,
         error: "",
       };
+
+    case CLEAR_STATE_ERROR_ALL_POKEMONS:
+      return initialState;
 
     default:
       return state;

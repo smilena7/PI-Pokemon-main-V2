@@ -6,6 +6,8 @@ import { pokemonsAction } from "../../actions/pokemonsAction";
 import { pokemonByTypeAction } from "../../actions/pokemonByTypeAction";
 import { clearDetailPoKemon } from "../../actions/pokemonDetailAction";
 import { clearCreatePoKemon } from "../../actions/PokemonCreateAction";
+import { clearAllPoKemons } from "../../actions/pokemonsAction";
+
 // Importando imagenes
 import loading from "../../images/loading.gif";
 // Importando componentes
@@ -13,6 +15,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import CardHome from "../../components/CardHome/CardHome";
 import Paged from "../../components/Paged/Paged";
 import CreatePokemonModel from "../../components/CreatePokemonModel/CreatePokemonModel";
+import ModalErrorHome from "../../components/ModalErrorHome/ModalErrorHome";
 // Importando los filtrados de utils
 import { tipos, ordenado } from "../../utils/filtros";
 // Importando estilos
@@ -36,6 +39,8 @@ const Home = () => {
   const pokemonsTypes = useSelector((state) => state.pokemonsByTypes.data);
   const pokemonDetail = useSelector((state) => state.pokemonDetail.data);
   const pokemonCreate = useSelector((state) => state.pokemonCreate.data);
+  const pokemonsError = useSelector((state) => state.pokemons.error);
+  console.log(pokemonsError);
 
   // Filtrando los tipos de pokemons (el filtro lo realizo en utils)
   if (pokemonType) pokemons = tipos(pokemonType, pokemons);
@@ -91,6 +96,11 @@ const Home = () => {
         <Paged page={page} setPage={setPage} maxPage={maxPage} />
       </div>
       {openModal && <CreatePokemonModel setOpenModal={setOpenModal} />}
+
+      {/* Manejo del error en el front */}
+      {pokemonsError && (
+        <ModalErrorHome error={pokemonsError} closeModal={clearAllPoKemons} />
+      )}
     </div>
   );
 };

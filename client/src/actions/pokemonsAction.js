@@ -5,6 +5,7 @@ import {
   ERROR_ALL_POKEMONS,
   GET_CREATE_POKEMONS_BY,
   ERROR_CREATE_POKEMONS_BY,
+  CLEAR_STATE_ERROR_ALL_POKEMONS,
 } from "../types";
 
 export const pokemonsAction = () => async (dispatch) => {
@@ -47,6 +48,12 @@ export const createPokemonsByAction = (createBy) => async (dispatch) => {
       payload: error.message,
     });
   }
+};
+
+export const clearAllPoKemons = () => async (dispatch) => {
+  dispatch({
+    type: CLEAR_STATE_ERROR_ALL_POKEMONS,
+  });
 };
 
 // {}
