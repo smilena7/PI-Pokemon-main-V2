@@ -3,6 +3,7 @@ import { createPokemonsByAction } from "../../actions/pokemonsAction";
 import { useDispatch } from "react-redux";
 import Search from "../Search/Search";
 import style from "./Navbar.module.css";
+//import { pokemonTypeNameAction } from "../../actions/pokemonTypeNameAction";
 
 const Navbar = ({
   pokemonsTypes,

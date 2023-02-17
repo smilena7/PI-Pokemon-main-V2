@@ -23,6 +23,7 @@ import ModalErrorHome from "../../components/ModalErrorHome/ModalErrorHome";
 import { tipos, ordenado } from "../../utils/filtros";
 // Importando estilos
 import style from "./Home.module.css";
+import { pokemonTypeNameAction } from "../../actions/pokemonTypeNameAction";
 
 const Home = () => {
   // Dispatch
@@ -45,11 +46,13 @@ const Home = () => {
   const pokemonCreate = useSelector((state) => state.pokemonCreate.data);
   const pokemonsError = useSelector((state) => state.pokemons.error);
   const pokemonNameError = useSelector((state) => state.pokemonName.error);
-  console.log(pokemonNameError);
+  const pokemonTypeName = useSelector((state) => state.pokemonTypeName.data);
 
   // Filtrando los tipos de pokemons (el filtro lo realizo en utils)
   if (pokemonType) pokemons = tipos(pokemonType, pokemons);
   if (orderPokemonBy) pokemons = ordenado(orderPokemonBy, pokemons);
+
+  //if (pokemonType) pokemons = tipos(pokemonType, pokemons);
 
   useEffect(() => {
     if (pokemons.length === 0 || pokemonsTypes.length === 0) {
@@ -63,7 +66,11 @@ const Home = () => {
       //dispatch(clearCreatePoKemon());
       setOpenModal(false);
     }
-  }, [dispatch, pokemonCreate, pokemonDetail]);
+    if (pokemonType) {
+      //dispatch del nuevo action y se le pasa el parametro (e.target.value)
+      dispatch(pokemonTypeNameAction(pokemonType));
+    }
+  }, [dispatch, pokemonCreate, pokemonDetail, pokemonType]);
 
   // Paginado
   const maxPage = pokemons.length / porPage;
