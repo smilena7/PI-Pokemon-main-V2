@@ -5,7 +5,7 @@ const Paged = ({ page, setPage, maxPage }) => {
   const [input, setInput] = useState(1);
 
   const onKeyDown = (e) => {
-    if (e.keyCode === 4) {
+    if (e.keyCode === 13) {
       setPage(parseInt(e.target.value));
       if (
         // en caso dado de que el numero sea menor a 1 o mayor al amximo o no sea un numero, entonces:
@@ -50,7 +50,7 @@ const Paged = ({ page, setPage, maxPage }) => {
         autoComplete="off"
         value={input}
       />
-      <p>de 4</p>
+      <p>de {Math.ceil(maxPage)}</p>
       <button
         disabled={page === Math.ceil(maxPage) || page > Math.ceil(maxPage)}
         onClick={nextPage}

@@ -31,6 +31,10 @@
   margin: 20px 20px 20px 25px;
 }
 
+.back {
+  color: red;
+}
+
 .pokemonImageDetail {
   height: 400px;
 }
