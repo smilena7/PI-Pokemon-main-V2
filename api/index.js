@@ -20,12 +20,12 @@
 const getAllTypes = require("./src/controllers/typesController.js"); // con esto nos evitamos hacer un get de types cada vez que entregmos al navegador para que la tabla de relaciones se actualice y cree las relaciones
 const server = require("./src/app.js");
 const { conn } = require("./src/db.js");
-const PORT = 3001;
+require("dotenv").config();
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(PORT, async () => {
+  server.listen(process.env.PORT, async () => {
     await getAllTypes();
-    console.log(`%s listening at ${PORT}`); // eslint-disable-line no-console
+    console.log("%s listening at", process.env.PORT); // eslint-disable-line no-console
   });
 });

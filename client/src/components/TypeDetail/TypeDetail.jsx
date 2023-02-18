@@ -57,7 +57,7 @@ export const getTypeStyle = (type) => {
       break;
 
     default:
-      backgroundColor = "#000";
+      backgroundColor = "#000000";
       break;
   }
   return { backgroundColor, color: "#FFF", margin: "20px 20px 20px 20px" };

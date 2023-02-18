@@ -105,8 +105,8 @@ export const CardDetail = (props) => {
         break;
 
       default:
-        backgroundColor = "#f2f2f2";
-        color = "#000000";
+        backgroundColor = "#f4d54c";
+        color = "white";
 
         break;
     }
