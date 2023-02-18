@@ -14,19 +14,19 @@
   height: 38px;
   background: #e4f7b4;
   border-radius: 10px;
+  margin-top: 0.3em;
 }
 
 .searchBtn {
-  color: #003060;
+  color: white;
   background: transparent;
   border: 2px solid #003060;
   border-radius: 6px;
-  color: black;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   margin: 0 0.2px 0 20px;
   --webkit-transition-duration: 0.4s;
   transition-duration: 0.4s;
@@ -36,5 +36,5 @@
 
 .searchBtn:hover {
   background-color: #003060;
-  color: white;
+  color: #e4f7b4;
 }

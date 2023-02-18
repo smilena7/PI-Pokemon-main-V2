@@ -6,11 +6,14 @@
   align-items: center;
   height: 100px;
   padding: 1%;
+  background-color: #003060;
+  border-radius: 0 0 30px 30px;
 }
 .createBy {
   display: flex;
   gap: 1em;
   padding: 2%;
+  margin: 3em 0 1em 0;
 }
 
 .createBy select option {
@@ -20,7 +23,7 @@
 select {
   cursor: pointer;
   box-shadow: none;
-  background: #003060;
+  background: #e4f7b4;
   width: auto;
   font-size: 0.9em;
   padding-top: 1em;
@@ -30,6 +33,6 @@ select {
   border-radius: 5px;
   border: none;
   outline: none;
-  color: white;
+  color: black;
   font-weight: bold;
 }
