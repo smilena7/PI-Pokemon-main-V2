@@ -1,6 +1,22 @@
 export const tipos = (type, array) => {
-  if (array.length) return array.filter((p) => p?.type?.includes(type));
+  // Filtrado API y DB
+  let tipos = array.filter((p) => p.Tipos);
+  let tiposMap = tipos.map((p) => p.Tipos);
+  console.log(tiposMap[0], "tipos");
+  if (tipos?.length) {
+    console.log("2");
+    if (tiposMap[0]?.filter((p) => p?.name?.includes(type))) {
+      return tipos;
+    }
+  } else if (array.length) {
+    console.log("1");
+    return array.filter((p) => p?.type?.includes(type));
+  }
   return [];
+
+  // Filtrado por API
+  /* if (array.length) return array.filter((p) => p?.type?.includes(type));
+  return []; */
 };
 
 export const ordenado = (order, array) => {

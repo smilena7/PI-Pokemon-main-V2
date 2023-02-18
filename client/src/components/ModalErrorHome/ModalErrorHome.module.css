@@ -32,12 +32,12 @@
 }
 
 .error {
-  margin: auto;
+  margin: 20px auto 0 5.5em;
 }
 
 .close {
   cursor: pointer;
-  padding: 0.5em;
+  margin: 0.5em;
 }
 
 .containerTxtError {

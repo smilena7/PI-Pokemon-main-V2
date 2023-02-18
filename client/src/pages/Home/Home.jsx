@@ -41,6 +41,9 @@ const Home = () => {
   let pokemons = useSelector((state) => state.pokemons.data);
   const isLoading = useSelector((state) => state.pokemons.isLoading);
   const isLoadingName = useSelector((state) => state.pokemonName.isLoading);
+  const isLoadingPokemonTypeName = useSelector(
+    (state) => state.pokemonTypeName.isLoading
+  );
   const pokemonsTypes = useSelector((state) => state.pokemonsByTypes.data);
   const pokemonDetail = useSelector((state) => state.pokemonDetail.data);
   const pokemonCreate = useSelector((state) => state.pokemonCreate.data);
@@ -51,11 +54,12 @@ const Home = () => {
   // Filtrando los tipos de pokemons (el filtro lo realizo en utils)
   if (pokemonType) pokemons = tipos(pokemonType, pokemons);
   if (orderPokemonBy) pokemons = ordenado(orderPokemonBy, pokemons);
+  if (pokemonType) pokemons = tipos(pokemonType, pokemonTypeName);
 
   //if (pokemonType) pokemons = tipos(pokemonType, pokemons);
 
   useEffect(() => {
-    if (pokemons.length === 0 || pokemonsTypes.length === 0) {
+    if (pokemons?.length === 0 || pokemonsTypes.length === 0) {
       dispatch(pokemonsAction());
       dispatch(pokemonByTypeAction());
     }
@@ -73,7 +77,7 @@ const Home = () => {
   }, [dispatch, pokemonCreate, pokemonDetail, pokemonType]);
 
   // Paginado
-  const maxPage = pokemons.length / porPage;
+  const maxPage = pokemons?.length / porPage;
 
   return (
     <div>
@@ -89,7 +93,7 @@ const Home = () => {
         />
       </div>
       <div>
-        {isLoading || isLoadingName ? (
+        {isLoading || isLoadingName || isLoadingPokemonTypeName ? (
           <div className={style.containLoading}>
             <img src={loading} alt="loading..." className={style.loading} />
           </div>
