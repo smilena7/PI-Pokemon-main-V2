@@ -11,8 +11,7 @@ export const pokemonByNameAction = (name) => async (dispatch) => {
     type: IS_LOADING_POKEMON_NAME,
   });
   try {
-    const URL = process.env.REACT_APP_BASE_URL;
-    const response = await axios.get(`${URL}/api/pokemonsName?name=${name}`);
+    const response = await axios.get(`/api/pokemonsName?name=${name}`);
     dispatch({
       type: GET_POKEMON_BY_NAME,
       payload: response.data,

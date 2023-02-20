@@ -11,8 +11,7 @@ export const pokemonCreateAction = (data) => async (dispatch) => {
     type: IS_LOADING_POKEMON_CREATE,
   });
   try {
-    const URL = process.env.REACT_APP_BASE_URL;
-    const response = await axios.post(`${URL}/api/pokemons`, {
+    const response = await axios.post(`/api/pokemons`, {
       name: data.name,
       vida: Number(data.vida),
       fuerza: Number(data.fuerza),

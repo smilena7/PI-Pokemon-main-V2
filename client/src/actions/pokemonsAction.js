@@ -33,10 +33,7 @@ export const createPokemonsByAction = (createBy) => async (dispatch) => {
     type: IS_LOADING_ALL_POKEMONS,
   });
   try {
-    const URL = process.env.REACT_APP_BASE_URL; // Guardo la URL en una variable de entorno .env
-    const response = await axios.get(
-      `${URL}/api/pokemons?createBy=${createBy}`
-    );
+    const response = await axios.get(`/api/pokemons?createBy=${createBy}`);
     dispatch({
       type: GET_CREATE_POKEMONS_BY,
       payload: response.data,

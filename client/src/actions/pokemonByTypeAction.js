@@ -12,8 +12,7 @@ export const pokemonByTypeAction = (name) => async (dispatch) => {
     type: IS_LOADING_POKEMON_TYPE,
   });
   try {
-    const URL = process.env.REACT_APP_BASE_URL;
-    const response = await axios.get(`${URL}/api/types`);
+    const response = await axios.get(`/api/types`);
     dispatch({
       type: GET_POKEMON_BY_TYPE,
       payload: response.data,

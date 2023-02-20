@@ -11,8 +11,7 @@ export const pokemonDetailAction = (id) => async (dispatch) => {
     type: IS_LOADING_POKEMON_DETAIL,
   });
   try {
-    const URL = process.env.REACT_APP_BASE_URL;
-    const response = await axios.get(`${URL}/api/pokemons/${id}`);
+    const response = await axios.get(`/api/pokemons/${id}`);
     dispatch({
       type: GET_POKEMON_DETAIL,
       payload: response.data,
