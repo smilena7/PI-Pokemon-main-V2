@@ -13,8 +13,7 @@ export const pokemonsAction = () => async (dispatch) => {
     type: IS_LOADING_ALL_POKEMONS,
   });
   try {
-    const URL = process.env.REACT_APP_BASE_URL; // Guardo la URL en una variable de entorno .env
-    const response = await axios.get(`${URL}/api/pokemons`);
+    const response = await axios.get(`/api/pokemons`);
     dispatch({
       type: GET_ALL_POKEMONS,
       payload: response.data,
