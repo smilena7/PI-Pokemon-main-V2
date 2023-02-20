@@ -1,5 +1,5 @@
 export const tipos = (type, array) => {
-  // Filtrado API y DB
+  // Filtrado API y DBB
   let tipos = array.filter((p) => p.Tipos);
   let tiposMap = tipos.map((p) => p.Tipos);
   console.log(tiposMap[0], "tipos");
