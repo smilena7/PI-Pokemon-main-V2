@@ -121,12 +121,11 @@ export const CardDetail = (props) => {
   const stylos = getTypeStyle(type);
 
   function onDeletePokemon(id) {
-    console.log("soy el id", id);
-    if (id.includes("-")) {
+    if (typeof id === "number") {
+      return alert("Solo puedes eliminar los pokemons que hayas creado");
+    } else {
       dispatch(deletePokemon(id));
       window.location.href = "/home";
-    } else {
-      return alert("Solo puedes eliminar los pokemons que crees");
     }
   }
 

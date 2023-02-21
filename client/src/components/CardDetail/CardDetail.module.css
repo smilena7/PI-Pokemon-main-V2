@@ -53,14 +53,14 @@
   background-color: #fd7d24;
   text-align: center;
   border-width: 0px;
-  width: 8rem;
+  width: 5rem;
   color: white;
   padding: 8px 16px;
   margin-top: 3px;
   border-radius: 10px;
   box-shadow: 0 5px 20px 3px rgba(0, 0, 0, 0.2);
   align-items: center;
-  font-size: 1em;
+  font-size: 0.9em;
 }
 
 .containerBtonExtra {

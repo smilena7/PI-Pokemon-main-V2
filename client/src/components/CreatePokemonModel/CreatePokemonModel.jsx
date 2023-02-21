@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { pokemonCreateAction } from "../../actions/PokemonCreateAction";
@@ -12,7 +12,6 @@ const CreatePokemonModel = ({ setOpenModal }) => {
 
   const dispatch = useDispatch();
   const options = useSelector((state) => state.pokemonsByTypes.data);
-  //const errorCreatePokemonName = useSelector((state) => state.pokemonCreate.error);
 
   // Manejado los estados
   const [data, setData] = useState({
@@ -27,6 +26,7 @@ const CreatePokemonModel = ({ setOpenModal }) => {
   });
 
   // Manejamos las validaciones
+  //const regexNumber = /[^0-9]/g;
   const validate = (data) => {
     let errors = {};
     if (!data.name) {
@@ -135,7 +135,7 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                 <div className={style.question}>
                   <label>Vida:</label>
                   <input
-                    type="text"
+                    type="number"
                     name="vida"
                     value={data.vida}
                     onChange={handleInputChange}
