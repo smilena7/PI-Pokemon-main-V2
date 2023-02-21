@@ -12,16 +12,7 @@ const CreatePokemonModel = ({ setOpenModal }) => {
 
   const dispatch = useDispatch();
   const options = useSelector((state) => state.pokemonsByTypes.data);
-
-  // Manejamos los errores
-  const validate = (input) => {
-    console.log(!input, "input");
-    let errors = {};
-    if (!input.name) {
-      errors.name = "El nombre del pokemón es necesario";
-    }
-    return errors;
-  };
+  //const errorCreatePokemonName = useSelector((state) => state.pokemonCreate.error);
 
   // Manejado los estados
   const [data, setData] = useState({
@@ -35,6 +26,40 @@ const CreatePokemonModel = ({ setOpenModal }) => {
     tipos: [],
   });
 
+  // Manejamos las validaciones
+  const validate = (data) => {
+    let errors = {};
+    if (!data.name) {
+      errors.name = "El nombre del pokemón es necesario";
+    }
+    // Validando vida
+    if (data.vida > 180) {
+      errors.vida = "La vida no puede ser mayor a 180";
+    }
+    // Validando fuerza
+    if (data.fuerza > 180) {
+      errors.fuerza = "La fuerza no puede ser mayor a 180";
+    }
+    // Validando defensa
+    if (data.defensa > 180) {
+      errors.defensa = "La defensa no puede ser mayor a 180";
+    }
+    // Validando velocidad
+    if (data.velocidad > 180) {
+      errors.velocidad = "La velocidad no puede ser mayor a 180";
+    }
+    // Validando altura
+    if (data.altura > 300) {
+      errors.altura = "La altura no puede ser mayor a 300";
+    }
+    // Validando peso
+    if (data.peso > 300) {
+      errors.peso = "El peso no puede ser mayor a 300";
+    }
+
+    return errors;
+  };
+
   const handleInputChange = (e) => {
     setData({
       ...data,
@@ -47,12 +72,6 @@ const CreatePokemonModel = ({ setOpenModal }) => {
       })
     );
   };
-  /* 
-  useEffect(() => {
-    if (errors.name) {
-      alert(errors.name);
-    }
-  }, [errors.name]); */
 
   const checkbox = (e) => {
     if (data.tipos.includes(e.target.value)) {
@@ -70,12 +89,15 @@ const CreatePokemonModel = ({ setOpenModal }) => {
   };
 
   const submit = async (e) => {
+    // prevenimos el comportamiento por defecto del submit, para que no e actualice la pagina al dar click en submit
     e.preventDefault();
-    if (!errors.name) {
+    if (!errors.name && data.name) {
       dispatch(pokemonCreateAction(data));
       dispatch(pokemonsAction());
     }
   };
+
+  console.log(errors, "errores");
 
   return ReactDOM.createPortal(
     <div className={style.backgroundCreatePortalModal}>
@@ -123,6 +145,9 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     className={style.stats}
                   />
                 </div>
+                {errors.vida ? (
+                  <p className={style.danger}>{errors.vida}</p>
+                ) : null}
                 <div className={style.question}>
                   <label>Fuerza:</label>
                   <input
@@ -134,6 +159,9 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     className={style.stats}
                   />
                 </div>
+                {errors.fuerza ? (
+                  <p className={style.danger}>{errors.fuerza}</p>
+                ) : null}
                 <div className={style.question}>
                   <label>Defensa:</label>
                   <input
@@ -145,6 +173,9 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     className={style.stats}
                   />
                 </div>
+                {errors.defensa ? (
+                  <p className={style.danger}>{errors.defensa}</p>
+                ) : null}
                 <div className={style.question}>
                   <label>Velocidad:</label>
                   <input
@@ -156,6 +187,9 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     className={style.stats}
                   />
                 </div>
+                {errors.velocidad ? (
+                  <p className={style.danger}>{errors.velocidad}</p>
+                ) : null}
                 <div className={style.question}>
                   <label>Altura:</label>
                   <input
@@ -167,6 +201,9 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     className={style.stats}
                   />
                 </div>
+                {errors.altura ? (
+                  <p className={style.danger}>{errors.altura}</p>
+                ) : null}
                 <div className={style.question}>
                   <label>Peso:</label>
                   <input
@@ -178,6 +215,9 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                     className={style.stats}
                   />
                 </div>
+                {errors.peso ? (
+                  <p className={style.danger}>{errors.peso}</p>
+                ) : null}
               </div>
             </div>
           </div>
@@ -201,7 +241,12 @@ const CreatePokemonModel = ({ setOpenModal }) => {
             </div>
           </div>
           <div className={style.containButtonFooter}>
-            <input type="submit" value="Crear" className={style.submit} />
+            <input
+              type="submit"
+              value="Crear"
+              className={style.submit}
+              disabled={errors.name || !data.name}
+            />
           </div>
         </form>
       </div>

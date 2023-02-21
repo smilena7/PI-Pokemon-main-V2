@@ -34,6 +34,7 @@ const pokemonDetailReducer = (state = initialState, action) => {
         isLoading: false,
         error: action.payload,
       };
+
     case CLEAR_STATE_DETAIL:
       return initialState;
 

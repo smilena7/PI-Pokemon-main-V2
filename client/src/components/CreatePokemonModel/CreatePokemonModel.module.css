@@ -102,13 +102,14 @@
 .danger {
   color: red;
   font-size: 10px;
+  margin: 0;
 }
 
 form .danger input {
   appearance: none;
   text-align: center;
   background-color: none;
-  border: 1px solid rgb(22, 160, 133);
+  border: 1px solid #003060;
   line-height: 0;
   font-size: 17px;
   width: 100%;
@@ -135,7 +136,7 @@ form .danger input {
 
 .question input {
   margin-right: 1em;
-  border: 1px solid rgb(22, 160, 133);
+  border: 1px solid #003060;
   border-radius: 10px;
   font-weight: 500;
 }
@@ -187,8 +188,20 @@ form .danger input {
   border-radius: 8px;
 }
 
+.submit:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}
+
 .submit:hover {
   background: #ddd;
   color: #003060;
-  border: 2px solid #003060;
+  border: 1px solid #003060;
+}
+
+.submit:hover:disabled {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

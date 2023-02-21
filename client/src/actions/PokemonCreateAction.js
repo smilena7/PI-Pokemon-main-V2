@@ -31,7 +31,7 @@ export const pokemonCreateAction = (data) => async (dispatch) => {
     console.log(error.message);
     dispatch({
       type: ERROR_POKEMON_CREATE,
-      payload: error.message,
+      payload: error,
     });
   }
 };

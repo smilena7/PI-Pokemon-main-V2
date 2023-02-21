@@ -1,13 +1,16 @@
 import React from "react";
 import TypeDetail from "../../components/TypeDetail/TypeDetail";
 import StatsDetail from "../../components/StatsDetail/StatsDetail";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import loading from "../../images/loading.gif";
 import { Link } from "react-router-dom";
 import back from "../../images/back.svg";
+//import { deletePokemon } from "../../actions/pokemonDetailAction";
 import style from "./CardDetail.module.css";
 
 export const CardDetail = (props) => {
+  //const dispatch = useDispatch();
+
   const {
     id,
     name,
@@ -152,7 +155,6 @@ export const CardDetail = (props) => {
                 speed={speed || velocidad}
               />
             </div>
-            <div></div>
           </div>
         </div>
       )}
