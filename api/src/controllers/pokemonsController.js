@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const { Pokemon, Tipo, PokemonTipo } = require("../db.js");
+const { Pokemon, Tipo } = require("../db.js");
 
 // *GET /pokemons*
 const getAllPokemons = async function (req, res) {
@@ -176,7 +176,7 @@ const postPokemon = async function (req, res) {
     if (!name) return res.status(400).json("Es neceario el nombre");
 
     const existe = await Pokemon.findOne({ where: { name: name } });
-    if (existe) return res.status(400).json("El pokemon ya existe");
+    if (existe) return res.status(400).json("El pokemón ya existe");
 
     const newPokemon = await Pokemon.create(
       {
@@ -214,11 +214,35 @@ const postPokemon = async function (req, res) {
 
     res.status(200).send(typeID.dataValues);
   } catch (error) {
+    res
+      .status(400)
+      .json({ message: error.message, mensaje: "El pokemon ya existe" });
+  }
+};
+
+// *DELETE /pokemons/{idPokemon}*:
+const deletePokemonID = async function (req, res) {
+  const { id } = req.params;
+  try {
+    if (id.includes("-")) {
+      const pokemonToDelete = await Pokemon.findByPk(id);
+      await pokemonToDelete.destroy();
+      res.status(200).send(pokemonToDelete);
+    } else {
+      res.status(400).send("Solo puedes eliminar los pokemons que create");
+    }
+  } catch (error) {
     res.status(400).json({ message: error.message });
   }
 };
 
-module.exports = { getAllPokemons, getPokemonID, getPokemonName, postPokemon };
+module.exports = {
+  getAllPokemons,
+  getPokemonID,
+  getPokemonName,
+  postPokemon,
+  deletePokemonID,
+};
 
 /*
 
