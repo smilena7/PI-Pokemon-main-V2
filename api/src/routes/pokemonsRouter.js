@@ -12,7 +12,7 @@ router.get("/pokemons", getAllPokemons);
 router.get("/pokemons/:id", getPokemonID);
 router.get("/pokemonsName", getPokemonName);
 router.post("/pokemons", postPokemon);
-router.detele("/pokemons/:id", deletePokemonID);
+router.delete("/pokemons/:id", deletePokemonID);
 
 module.exports = router;
 // {}
