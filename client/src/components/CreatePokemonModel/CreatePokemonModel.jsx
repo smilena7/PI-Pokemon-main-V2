@@ -97,8 +97,6 @@ const CreatePokemonModel = ({ setOpenModal }) => {
     }
   };
 
-  console.log(errors, "errores");
-
   return ReactDOM.createPortal(
     <div className={style.backgroundCreatePortalModal}>
       <div className={style.modalWrapper}>
@@ -137,7 +135,7 @@ const CreatePokemonModel = ({ setOpenModal }) => {
                 <div className={style.question}>
                   <label>Vida:</label>
                   <input
-                    type="number"
+                    type="text"
                     name="vida"
                     value={data.vida}
                     onChange={handleInputChange}

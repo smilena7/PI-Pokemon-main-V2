@@ -1,15 +1,17 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { deletePokemon } from "../../actions/pokemonDetailAction";
 import TypeDetail from "../../components/TypeDetail/TypeDetail";
 import StatsDetail from "../../components/StatsDetail/StatsDetail";
-import { useDispatch, useSelector } from "react-redux";
-import loading from "../../images/loading.gif";
-import { Link } from "react-router-dom";
 import back from "../../images/back.svg";
-//import { deletePokemon } from "../../actions/pokemonDetailAction";
+import loading from "../../images/loading.gif";
+import trash from "../../images/trash.svg";
+
 import style from "./CardDetail.module.css";
 
 export const CardDetail = (props) => {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const {
     id,
@@ -118,6 +120,16 @@ export const CardDetail = (props) => {
 
   const stylos = getTypeStyle(type);
 
+  function onDeletePokemon(id) {
+    console.log("soy el id", id);
+    if (id.includes("-")) {
+      dispatch(deletePokemon(id));
+      window.location.href = "/home";
+    } else {
+      return alert("Solo puedes eliminar los pokemons que crees");
+    }
+  }
+
   return (
     <>
       {isLoading ? (
@@ -148,6 +160,14 @@ export const CardDetail = (props) => {
               </div>
             </div>
             <div>
+              <div className={style.containerBtonExtra}>
+                <img
+                  src={trash}
+                  alt="trash"
+                  className={style.btonExtra}
+                  onClick={() => onDeletePokemon(id)}
+                />
+              </div>
               <StatsDetail
                 hp={hp || vida}
                 attack={attack || ataque}

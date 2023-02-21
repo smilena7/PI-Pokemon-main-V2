@@ -4,10 +4,12 @@ import {
   IS_LOADING_POKEMON_DETAIL,
   ERROR_POKEMON_DETAIL,
   CLEAR_STATE_DETAIL,
+  DELETE_MY_POKEMON,
 } from "../types";
 
 const initialState = {
   data: {},
+  pokemonDelete: {},
   isLoading: false,
   error: "",
 };
@@ -37,6 +39,12 @@ const pokemonDetailReducer = (state = initialState, action) => {
 
     case CLEAR_STATE_DETAIL:
       return initialState;
+
+    case DELETE_MY_POKEMON:
+      return {
+        ...state,
+        pokemonDelete: action.payload.id,
+      };
 
     default:
       return state;
