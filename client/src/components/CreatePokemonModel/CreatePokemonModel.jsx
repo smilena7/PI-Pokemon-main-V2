@@ -101,7 +101,7 @@ const CreatePokemonModel = ({ setOpenModal }) => {
     if (!errors.name && data.name) {
       const pokemonCreado = validateName(data);
       if (pokemonCreado.length) {
-        alert("Debes ecoger otro nombre, el pokemón ya existe");
+        alert("Debes escoger otro nombre, el pokemón ya existe");
       } else {
         dispatch(pokemonCreateAction(data));
         dispatch(pokemonsAction());
