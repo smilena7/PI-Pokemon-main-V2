@@ -10,6 +10,8 @@ import style from "./CreatePokemonModel.module.css";
 const CreatePokemonModel = ({ setOpenModal }) => {
   const [errors, setErrors] = useState({});
 
+  let pokemonsExistentes = useSelector((state) => state.pokemons.data);
+
   const dispatch = useDispatch();
   const options = useSelector((state) => state.pokemonsByTypes.data);
 
@@ -60,6 +62,11 @@ const CreatePokemonModel = ({ setOpenModal }) => {
     return errors;
   };
 
+  const validateName = (data) => {
+    const pokemon = pokemonsExistentes.filter((e) => e.name === data.name);
+    return pokemon;
+  };
+
   const handleInputChange = (e) => {
     setData({
       ...data,
@@ -92,8 +99,13 @@ const CreatePokemonModel = ({ setOpenModal }) => {
     // prevenimos el comportamiento por defecto del submit, para que no e actualice la pagina al dar click en submit
     e.preventDefault();
     if (!errors.name && data.name) {
-      dispatch(pokemonCreateAction(data));
-      dispatch(pokemonsAction());
+      const pokemonCreado = validateName(data);
+      if (pokemonCreado.length) {
+        alert("El pokemon ya existe");
+      } else {
+        dispatch(pokemonCreateAction(data));
+        dispatch(pokemonsAction());
+      }
     }
   };
 
