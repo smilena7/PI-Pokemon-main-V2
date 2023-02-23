@@ -35,19 +35,19 @@ const CreatePokemonModel = ({ setOpenModal }) => {
       errors.name = "El nombre del pokemón es necesario";
     }
     // Validando vida
-    if (data.vida > 180) {
+    if (data.vida > 100) {
       errors.vida = "La vida no puede ser mayor a 180";
     }
     // Validando fuerza
-    if (data.fuerza > 180) {
+    if (data.fuerza > 100) {
       errors.fuerza = "La fuerza no puede ser mayor a 180";
     }
     // Validando defensa
-    if (data.defensa > 180) {
+    if (data.defensa > 100) {
       errors.defensa = "La defensa no puede ser mayor a 180";
     }
     // Validando velocidad
-    if (data.velocidad > 180) {
+    if (data.velocidad > 100) {
       errors.velocidad = "La velocidad no puede ser mayor a 180";
     }
     // Validando altura
